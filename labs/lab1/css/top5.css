@@ -1,0 +1,31 @@
+body {
+    background-color: black;
+    color: white;
+    margin: 20px;
+    line-height: 1.6;
+}
+
+h1 {
+    font-family: Georgia, serif;
+    text-align: center;
+}
+
+li {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+img {
+    padding: 5px;
+    display: block;
+}
+
+.artist {
+    border: 1px solid red;
+}
+
+.spotlight {
+    padding: 10px;
+    border: 3px dotted yellow;
+    width: 300px;
+    text-align: center;
+}
