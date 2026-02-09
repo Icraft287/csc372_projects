@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Agent Website Wireframes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="content">
+
+        <h1> T's Travel </h1>
+        
+
+        <div class="page-tabs">
+            <button class="tab-btn active" onclick="showWireframe('homepage')">Homepage</button>
+            <button class="tab-btn" onclick="showWireframe('services')">Services</button>
+            <button class="tab-btn" onclick="showWireframe('contact')">Contact</button>
+        </div>
+
+        <!-- Logo section -->
+        <div class="logo-section">
+            <img src="images/client_logo.png" alt="Client Logo" class="client-logo">
+        </div>
+
+        <!-- HOMEPAGE WIREFRAME -->
+        <div id="homepage" class="wireframe active">
+            <!-- Navigation -->
+            <div class="navbar">
+                <div class="logo">
+                    <div class="logo-icon">✈️</div>
+                    
+                </div>
+                <div class="nav-links">
+                    <a href="#" class="nav-link">Home</a>
+                    <a href="#" class="nav-link">About</a>
+                    <a href="#" class="nav-link dropdown">Services</a>
+                    <a href="#" class="nav-link dropdown">Destinations</a>
+                    <a href="#" class="nav-link">Testimonials</a>
+                    <button class="contact-btn">Contact Us</button>
+                </div>
+            </div>
+
+            <div class="annotation">
+                <strong>Navigation Design:</strong> Fixed navigation bar with logo on left, menu items center-right, and prominent "Contact Us" button. Dropdown indicators (▼) for Services and Destinations. Mobile-responsive with hamburger menu layout.
+            </div>
+
+            <!-- Hero Section -->
+            <div class="hero">
+                <div class="hero-content">
+                    <h2>Your Dream Vacation Awaits</h2>
+                    <p>Personalized travel planning with expert guidance every step of the way</p>
+                    <button class="cta-button">Plan Your Trip</button>
+                </div>
+            </div>
+
+            <div class="annotation">
+                <strong>Hero Section:</strong> Eye-catching gradient background with welcoming headline, brief value proposition, and clear call-to-action button. Background decoration creates visual interest without clutter.
+            </div>
+
+            <!-- Services Overview -->
+            <div class="content-section">
+                <h2 class="section-title">Our Services</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon">🚢</div>
+                        <h3>Cruises</h3>
+                        <p>Explore the world's oceans with carefully curated cruise experiences</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🏖️</div>
+                        <h3>All-Inclusive Vacations</h3>
+                        <p>Stress-free getaways with everything included</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">👥</div>
+                        <h3>Group Travel</h3>
+                        <p>Perfect trips for families, friends, and organizations</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">✨</div>
+                        <h3>Custom Planning</h3>
+                        <p>Tailored itineraries designed just for you</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="annotation">
+                <strong>Services Overview:</strong> Grid layout showcasing four main service categories with icons, headings, and brief descriptions. Cards have hover effects for interactivity. Responsive grid adjusts for mobile devices.
+            </div>
+
+            <!-- Destination Highlights -->
+            <div class="content-section" style="background: var(--warm-sand);">
+                <h2 class="section-title">Popular Destinations</h2>
+                <div class="destination-grid">
+                    <div class="destination-card">🌴 Caribbean</div>
+                    <div class="destination-card">🗼 Europe</div>
+                    <div class="destination-card">🚢 Cruises</div>
+                    <div class="destination-card">💑 Romantic Getaways</div>
+                </div>
+            </div>
+
+            <div class="annotation">
+                <strong>Destination Highlights:</strong> Visual cards with gradient backgrounds representing different travel categories. Interactive hover effects to engage users. Links to detailed destination pages.
+            </div>
+
+            <!-- Testimonials Preview -->
+            <div class="content-section">
+                <h2 class="section-title">What Our Clients Say</h2>
+                <div class="testimonial-container">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"Amazing service! Our trip to Italy was perfectly planned down to every detail. Couldn't have asked for a better experience."</p>
+                        <p class="testimonial-author">- Sarah & Michael T.</p>
+                    </div>
+                    <div class="testimonial">
+                        <p class="testimonial-text">"The cruise they arranged for our family reunion was unforgettable. Everyone had a wonderful time!"</p>
+                        <p class="testimonial-author">- Johnson Family</p>
+                    </div>
+                    <div class="testimonial">
+                        <p class="testimonial-text">"Professional, knowledgeable, and truly cared about making our honeymoon special. Highly recommend!"</p>
+                        <p class="testimonial-author">- Emily & David R.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="annotation">
+                <strong>Testimonials Preview:</strong> Three featured testimonials in card format with quotes and client names. Clean, readable design builds trust and credibility. Link to full testimonials page.
+            </div>
+
+            <!-- Final CTA -->
+            <div class="content-section" style="text-align: center; background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-teal) 100%); color: white; padding: 80px 40px;">
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 20px;">Ready to Start Your Adventure?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 30px; opacity: 0.95;">Let's create your perfect travel experience together</p>
+                <button class="cta-button">Get Started Today</button>
+            </div>
+
+            <div class="annotation">
+                <strong>Call-to-Action Section:</strong> Prominent CTA section with contrasting background, compelling headline, and action button. Encourages users to contact the agency.
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Home</a>
+                    <a href="#" class="footer-link">About</a>
+                    <a href="#" class="footer-link">Services</a>
+                    <a href="#" class="footer-link">Destinations</a>
+                    <a href="#" class="footer-link">Testimonials</a>
+                    <a href="#" class="footer-link">Contact</a>
+                </div>
+                <p>&copy; 2024 YourTravel Agency. All rights reserved.</p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">📧 info@yourtravelagency.com | 📞 (555) 123-4567</p>
+            </div>
+
+            <div class="annotation">
+                <strong>Footer:</strong> Comprehensive footer with navigation links, copyright info, and contact details accessible on every page.
+            </div>
+        </div>
+
+        <!-- SERVICES PAGE WIREFRAME -->
+        <div id="services" class="wireframe">
+            <!-- Navigation -->
+            <div class="navbar">
+                <div class="logo">
+                    <div class="logo-icon">✈️</div>
+                    <span>YourTravel Agency</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#" class="nav-link">Home</a>
+                    <a href="#" class="nav-link">About</a>
+                    <a href="#" class="nav-link dropdown">Services</a>
+                    <a href="#" class="nav-link dropdown">Destinations</a>
+                    <a href="#" class="nav-link">Testimonials</a>
+                    <button class="contact-btn">Contact Us</button>
+                </div>
+            </div>
+
+            <!-- Page Header -->
+            <div class="hero" style="padding: 60px 40px;">
+                <div class="hero-content">
+                    <h2>Our Travel Services</h2>
+                    <p>Comprehensive travel planning tailored to your needs</p>
+                </div>
+            </div>
+
+            <div class="annotation">
+                <strong>Services Page Header:</strong> Shorter hero section maintaining brand consistency with clear page title.
+            </div>
+
+            <!-- Service Categories -->
+            <div class="content-section">
+                <!-- Cruises -->
+                <div class="service-category">
+                    <div class="service-header">
+                        <div class="service-icon-large">🚢</div>
+                        <div>
+                            <h3>Cruise Vacations</h3>
+                            <p style="color: var(--text-dark); margin-top: 5px;">Sail away to adventure with our expertly planned cruise experiences</p>
+                        </div>
+                    </div>
+                    <div class="service-details">
+                        <div class="service-feature">
+                            <h4>Ocean Cruises</h4>
+                            <p>Explore multiple destinations in luxury and comfort</p>
+                        </div>
+                        <div class="service-feature">
+                            <h4>River Cruises</h4>
+                            <p>Intimate journeys through Europe's waterways</p>
+                        </div>
+                        <div class="service-feature">
+                            <h4>Adventure Cruises</h4>
+                            <p>Expedition-style cruises to exotic locations</p>
+                        </div>
+                        <div class="service-feature">
+                            <h4>Luxury Lines</h4>
+                            <p>Premium cruise experiences with white-glove service</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotation">
+                    <strong>Service Detail Cards:</strong> Each service category has its own expandable section with icon, description, and feature breakdown. Grid layout shows subcategories clearly.
+                </div>
+
+                <!-- All-Inclusive -->
+                <div class="service-category">
+                    <div class="service-header">
+                        <div class="service-icon-large">🏖️</div>
+                        <div>
+                            <h3>All-Inclusive Vacations</h3>
+                            <p style="color: var(--text-dark); margin-top: 5px;">Everything you need for the ultimate stress-free getaway</p>
+                        </div>
+                    </div>
+                    <div class="service-details">
+                        <div class="service-feature">
+                            <h4>Beach Resorts</h4>
+                            <p>Tropical paradise with all amenities included</p>
+                        </div>
+                        <div class="service-feature">
+                            <h4>Adult-Only Retreats</h4>
+                            <p>Peaceful escapes for couples and adults</p>
+                        </div>
+                        <div class="service-feature">
+                            <h4>Family Resorts</h4>
+                            <p>Kid-friendly fun with activities for all ages</p>
+                        </div>
+                        <div class="service-feature">
+                            <h4>Luxury All-Inclusive</h4>
+                            <p>Premium experiences with gourmet dining</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group Travel -->
+                <div class="service-category">
+                    <div class="service-header">
+                        <div class="service-icon-large">👥</div>
+                        <div>
+                            <h3>Group Travel Planning</h3>
+                            <p style="color: var(--text-dark); margin-top: 5px;">Coordinated trips for families, friends, and organizations</p>
+                        </div>
+                    </div>
+                    <div class="service-details">
+                        <div class="service-feature">
+                            <h4>Family Reunions</h4>
+                            <p>Bring everyone together for memorable moments</p>
+                        </div>
+                        <div class="service-feature">
+                            <h4>Corporate Retreats</h4>
+                            <p>Team building in inspiring destinations</p>
+                        </div>
+                        <div class="service-feature">
+                            <h4>Milestone Celebrations</h4>
+                            <p>Anniversaries, birthdays, and special occasions</p>
+                        </div>
+                        <div class="service-feature">
+                            <h4>Educational Tours</h4>
+                            <p>Group learning experiences and cultural immersion</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Planning -->
+                <div class="service-category">
+                    <div class="service-header">
+                        <div class="service-icon-large">✨</div>
+                        <div>
+                            <h3>Custom Trip Planning</h3>
+                            <p style="color: var(--text-dark); margin-top: 5px;">Personalized itineraries designed around your unique preferences</p>
+                        </div>
+                    </div>
+                    <div class="service-details">
+                        <div class="service-feature">
+                            <h4>Honeymoons</h4>
+                            <p>Romantic escapes tailored for newlyweds</p>
+                        </div>
+                        <div class="service-feature">
+                            <h4>Adventure Travel</h4>
+                            <p>Active vacations for thrill-seekers</p>
+                        </div>
+                        <div class="service-feature">
+                            <h4>Cultural Immersion</h4>
+                            <p>Deep dives into local culture and cuisine</p>
+                        </div>
+                        <div class="service-feature">
+                            <h4>Luxury Escapes</h4>
+                            <p>First-class travel with exclusive experiences</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="content-section" style="text-align: center; background: var(--accent-teal); color: white; padding: 60px 40px;">
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 20px;">Not Sure Which Service is Right for You?</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 30px;">Let's discuss your travel dreams and find the perfect match</p>
+                <button class="cta-button">Schedule a Consultation</button>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Home</a>
+                    <a href="#" class="footer-link">About</a>
+                    <a href="#" class="footer-link">Services</a>
+                    <a href="#" class="footer-link">Destinations</a>
+                    <a href="#" class="footer-link">Testimonials</a>
+                    <a href="#" class="footer-link">Contact</a>
+                </div>
+                <p>&copy; 2024 YourTravel Agency. All rights reserved.</p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">📧 info@yourtravelagency.com | 📞 (555) 123-4567</p>
+            </div>
+        </div>
+
+        <!-- CONTACT PAGE WIREFRAME -->
+        <div id="contact" class="wireframe">
+            <!-- Navigation -->
+            <div class="navbar">
+                <div class="logo">
+                    <div class="logo-icon">✈️</div>
+                    <span>YourTravel Agency</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#" class="nav-link">Home</a>
+                    <a href="#" class="nav-link">About</a>
+                    <a href="#" class="nav-link dropdown">Services</a>
+                    <a href="#" class="nav-link dropdown">Destinations</a>
+                    <a href="#" class="nav-link">Testimonials</a>
+                    <button class="contact-btn">Contact Us</button>
+                </div>
+            </div>
+
+            <!-- Page Header -->
+            <div class="hero" style="padding: 60px 40px;">
+                <div class="hero-content">
+                    <h2>Get in Touch</h2>
+                    <p>We're here to help plan your perfect getaway</p>
+                </div>
+            </div>
+
+            <div class="annotation">
+                <strong>Contact Page Header:</strong> Welcoming header encouraging user contact with friendly, approachable messaging.
+            </div>
+
+            <!-- Contact Layout -->
+            <div class="contact-layout">
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p style="margin-bottom: 30px; opacity: 0.9;">Reach out through any of these channels - we're ready to help!</p>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div>
+                            <strong style="display: block; margin-bottom: 5px;">Phone</strong>
+                            <span>(555) 123-4567</span><br>
+                            <span style="font-size: 0.9rem; opacity: 0.8;">Mon-Fri: 9am-6pm EST</span>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">📧</div>
+                        <div>
+                            <strong style="display: block; margin-bottom: 5px;">Email</strong>
+                            <span>info@yourtravelagency.com</span><br>
+                            <span style="font-size: 0.9rem; opacity: 0.8;">We respond within 24 hours</span>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div>
+                            <strong style="display: block; margin-bottom: 5px;">Office Location</strong>
+                            <span>123 Travel Lane, Suite 456</span><br>
+                            <span>Wanderlust City, ST 12345</span>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">⏰</div>
+                        <div>
+                            <strong style="display: block; margin-bottom: 5px;">Business Hours</strong>
+                            <span>Monday - Friday: 9:00 AM - 6:00 PM</span><br>
+                            <span>Saturday: 10:00 AM - 3:00 PM</span><br>
+                            <span>Sunday: Closed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Travel Inquiry Form -->
+                <div class="inquiry-form">
+                    <h3>Travel Inquiry Form</h3>
+                    <p style="color: var(--text-dark); margin-bottom: 25px;">Tell us about your dream vacation and we'll get back to you with personalized recommendations.</p>
+
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="John Smith">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="john@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">Type of Service *</label>
+                            <select id="service" name="service" required>
+                                <option value="">Select a service...</option>
+                                <option value="cruise">Cruise Vacation</option>
+                                <option value="all-inclusive">All-Inclusive Resort</option>
+                                <option value="group">Group Travel</option>
+                                <option value="custom">Custom Trip Planning</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="destination">Preferred Destination</label>
+                            <input type="text" id="destination" name="destination" placeholder="e.g., Caribbean, Europe, Asia">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dates">Preferred Travel Dates</label>
+                            <input type="text" id="dates" name="dates" placeholder="e.g., June 2024">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="travelers">Number of Travelers</label>
+                            <input type="number" id="travelers" name="travelers" min="1" placeholder="2">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="budget">Approximate Budget (Optional)</label>
+                            <select id="budget" name="budget">
+                                <option value="">Select budget range...</option>
+                                <option value="under-2000">Under $2,000</option>
+                                <option value="2000-5000">$2,000 - $5,000</option>
+                                <option value="5000-10000">$5,000 - $10,000</option>
+                                <option value="over-10000">Over $10,000</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Additional Details</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your travel preferences, special requests, or any questions you have..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Submit Inquiry</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="annotation">
+                <strong>Contact Layout:</strong> Two-column layout (stacks on mobile). Left side shows contact information with icons for quick scanning. Right side features comprehensive travel inquiry form with all necessary fields. Form includes service type, destination preferences, dates, budget, and space for detailed requests.
+            </div>
+
+            <!-- Additional CTA -->
+            <div class="content-section" style="text-align: center; background: var(--warm-sand); padding: 60px 40px;">
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary-blue); margin-bottom: 15px;">Prefer to Talk First?</h2>
+                <p style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 25px;">Give us a call and let's discuss your travel plans over the phone</p>
+                <a href="tel:5551234567" style="display: inline-block; background: var(--accent-teal); color: white; padding: 15px 40px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 1.1rem;">📞 Call Now: (555) 123-4567</a>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Home</a>
+                    <a href="#" class="footer-link">About</a>
+                    <a href="#" class="footer-link">Services</a>
+                    <a href="#" class="footer-link">Destinations</a>
+                    <a href="#" class="footer-link">Testimonials</a>
+                    <a href="#" class="footer-link">Contact</a>
+                </div>
+                <p>&copy; 2024 YourTravel Agency. All rights reserved.</p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">📧 info@yourtravelagency.com | 📞 (555) 123-4567</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/style..js"></script>
+</body>
+</html>
