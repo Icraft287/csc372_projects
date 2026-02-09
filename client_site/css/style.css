@@ -1,20 +1,44 @@
+/*
+    Author: Isaac Craft
+    Date: February 8, 2026
+    Description: Stylesheet for T's Travel Agency Website - Complete styling 
+    for responsive travel agency website including homepage, services page, and contact 
+    page. Features custom color scheme, animations, card layouts, forms, and mobile 
+    responsive design.
+    
+    AI Usage: Claude AI (Anthropic) was used to assist with adding documentation comments 
+    throughout this CSS file to improve code readability and maintainability.
+*/
+
+/* ============================================ */
+/* GLOBAL RESET & BOX SIZING                    */
+/* ============================================ */
+/* Removes default browser margins and padding, sets box-sizing for consistent layouts */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* ============================================ */
+/* CSS CUSTOM PROPERTIES (COLOR PALETTE)        */
+/* ============================================ */
+/* Defines the color scheme used throughout the site for easy theme management */
 :root {
-    --primary-blue: #1e3a5f;
-    --accent-teal: #2a9d8f;
-    --warm-sand: #f4e8d8;
-    --deep-ocean: #264653;
-    --coral-accent: #e76f51;
-    --soft-white: #fefefe;
-    --light-gray: #e8e8e8;
-    --text-dark: #2b2b2b;
+    --primary-blue: #1e3a5f;      /* Main brand color for headers and navigation */
+    --accent-teal: #2a9d8f;       /* Accent color for buttons and highlights */
+    --warm-sand: #f4e8d8;         /* Background color for cards and sections */
+    --deep-ocean: #264653;        /* Dark color for footer and text */
+    --coral-accent: #e76f51;      /* Attention-grabbing color for CTAs */
+    --soft-white: #fefefe;        /* Near-white for backgrounds */
+    --light-gray: #e8e8e8;        /* Borders and subtle backgrounds */
+    --text-dark: #2b2b2b;         /* Primary text color */
 }
 
+/* ============================================ */
+/* BODY & OVERALL LAYOUT STYLES                 */
+/* ============================================ */
+/* Sets the base font, background gradient, and overall page styling */
 body {
     font-family: 'Lato', sans-serif;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -23,11 +47,16 @@ body {
     color: var(--text-dark);
 }
 
+/* Main container for content with max-width and centering */
 .container {
     max-width: 1400px;
     margin: 0 auto;
 }
 
+/* ============================================ */
+/* TYPOGRAPHY - HEADINGS & TEXT                 */
+/* ============================================ */
+/* Main page heading (H1) */
 h1 {
     font-family: 'Playfair Display', serif;
     text-align: center;
@@ -37,6 +66,7 @@ h1 {
     font-weight: 700;
 }
 
+/* Subtitle text below main heading */
 .subtitle {
     text-align: center;
     color: var(--deep-ocean);
@@ -44,6 +74,10 @@ h1 {
     font-size: 1.1rem;
 }
 
+/* ============================================ */
+/* PAGE NAVIGATION TABS                         */
+/* ============================================ */
+/* Container for the wireframe selection tabs */
 .page-tabs {
     display: flex;
     gap: 15px;
@@ -52,6 +86,7 @@ h1 {
     flex-wrap: wrap;
 }
 
+/* Individual tab button styling */
 .tab-btn {
     background: white;
     border: 2px solid var(--accent-teal);
@@ -65,6 +100,7 @@ h1 {
     font-family: 'Lato', sans-serif;
 }
 
+/* Tab button hover effect */
 .tab-btn:hover {
     background: var(--accent-teal);
     color: white;
@@ -72,12 +108,17 @@ h1 {
     box-shadow: 0 4px 12px rgba(42, 157, 143, 0.3);
 }
 
+/* Active tab button styling */
 .tab-btn.active {
     background: var(--accent-teal);
     color: white;
     box-shadow: 0 4px 12px rgba(42, 157, 143, 0.3);
 }
 
+/* ============================================ */
+/* WIREFRAME CONTAINERS                         */
+/* ============================================ */
+/* Base wireframe container - hidden by default */
 .wireframe {
     display: none;
     background: white;
@@ -87,10 +128,12 @@ h1 {
     animation: fadeIn 0.5s ease;
 }
 
+/* Active wireframe - visible with fade-in animation */
 .wireframe.active {
     display: block;
 }
 
+/* Fade-in animation for wireframe transitions */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -102,7 +145,10 @@ h1 {
     }
 }
 
-/* Navigation Bar */
+/* ============================================ */
+/* NAVIGATION BAR STYLES                        */
+/* ============================================ */
+/* Main navigation bar at top of page */
 .navbar {
     background: var(--primary-blue);
     padding: 20px 40px;
@@ -112,6 +158,7 @@ h1 {
     border-bottom: 4px solid var(--accent-teal);
 }
 
+/* Logo/brand text styling */
 .logo {
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
@@ -122,6 +169,7 @@ h1 {
     gap: 10px;
 }
 
+/* Client logo image sizing and display */
 .client-logo {
     width: 200px;           /* exactly 200px wide */
     height: 200px;          /* exactly 200px tall */
@@ -130,6 +178,7 @@ h1 {
     margin: 0 auto;
 }
 
+/* Icon circle next to logo text */
 .logo-icon {
     width: 40px;
     height: 40px;
@@ -141,12 +190,14 @@ h1 {
     font-size: 1.5rem;
 }
 
+/* Container for navigation links */
 .nav-links {
     display: flex;
     gap: 30px;
     align-items: center;
 }
 
+/* Individual navigation link styling */
 .nav-link {
     color: white;
     text-decoration: none;
@@ -157,16 +208,19 @@ h1 {
     position: relative;
 }
 
+/* Navigation link hover effect */
 .nav-link:hover {
     background: rgba(255, 255, 255, 0.1);
 }
 
+/* Dropdown indicator for navigation links with submenus */
 .nav-link.dropdown::after {
     content: ' ▼';
     font-size: 0.7rem;
     margin-left: 5px;
 }
 
+/* Contact Us button in navigation */
 .contact-btn {
     background: var(--coral-accent);
     color: white;
@@ -178,13 +232,17 @@ h1 {
     transition: all 0.3s ease;
 }
 
+/* Contact button hover effect with scale animation */
 .contact-btn:hover {
     background: #d85a3a;
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(231, 111, 81, 0.4);
 }
 
-/* Hero Section */
+/* ============================================ */
+/* HERO/BANNER SECTION                          */
+/* ============================================ */
+/* Main hero banner with gradient background */
 .hero {
     background: linear-gradient(135deg, var(--accent-teal) 0%, var(--primary-blue) 100%);
     padding: 80px 40px;
@@ -194,6 +252,7 @@ h1 {
     overflow: hidden;
 }
 
+/* Decorative gradient circle in hero background */
 .hero::before {
     content: '';
     position: absolute;
@@ -205,6 +264,7 @@ h1 {
     border-radius: 50%;
 }
 
+/* Hero content container with z-index to appear above decorative elements */
 .hero-content {
     position: relative;
     z-index: 1;
@@ -212,6 +272,7 @@ h1 {
     margin: 0 auto;
 }
 
+/* Hero heading (H2) */
 .hero h2 {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
@@ -219,12 +280,14 @@ h1 {
     font-weight: 700;
 }
 
+/* Hero paragraph text */
 .hero p {
     font-size: 1.3rem;
     margin-bottom: 30px;
     opacity: 0.95;
 }
 
+/* Call-to-action button styling */
 .cta-button {
     background: var(--coral-accent);
     color: white;
@@ -239,17 +302,22 @@ h1 {
     text-decoration: none;
 }
 
+/* CTA button hover effect with lift animation */
 .cta-button:hover {
     background: #d85a3a;
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(231, 111, 81, 0.4);
 }
 
-/* Content Sections */
+/* ============================================ */
+/* CONTENT SECTIONS                             */
+/* ============================================ */
+/* Generic content section padding */
 .content-section {
     padding: 60px 40px;
 }
 
+/* Section title (H2) styling */
 .section-title {
     font-family: 'Playfair Display', serif;
     font-size: 2.2rem;
@@ -259,6 +327,10 @@ h1 {
     font-weight: 600;
 }
 
+/* ============================================ */
+/* SERVICE CARDS GRID LAYOUT                    */
+/* ============================================ */
+/* Responsive grid for service cards */
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -266,6 +338,7 @@ h1 {
     margin-bottom: 40px;
 }
 
+/* Individual service card styling */
 .card {
     background: var(--warm-sand);
     border-radius: 15px;
@@ -274,12 +347,14 @@ h1 {
     border: 2px solid transparent;
 }
 
+/* Card hover effect with lift and border highlight */
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     border-color: var(--accent-teal);
 }
 
+/* Icon circle at top of each card */
 .card-icon {
     width: 60px;
     height: 60px;
@@ -292,6 +367,7 @@ h1 {
     font-size: 1.8rem;
 }
 
+/* Card heading (H3) */
 .card h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
@@ -299,18 +375,23 @@ h1 {
     margin-bottom: 15px;
 }
 
+/* Card description paragraph */
 .card p {
     color: var(--text-dark);
     line-height: 1.6;
 }
 
-/* Destination Highlights */
+/* ============================================ */
+/* DESTINATION HIGHLIGHTS SECTION               */
+/* ============================================ */
+/* Grid layout for destination cards */
 .destination-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 25px;
 }
 
+/* Individual destination card with gradient background */
 .destination-card {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     height: 200px;
@@ -327,6 +408,7 @@ h1 {
     overflow: hidden;
 }
 
+/* Dark overlay on destination cards */
 .destination-card::before {
     content: '';
     position: absolute;
@@ -338,27 +420,34 @@ h1 {
     transition: opacity 0.3s ease;
 }
 
+/* Remove overlay on hover */
 .destination-card:hover::before {
     opacity: 0;
 }
 
+/* Destination card hover effect with scale */
 .destination-card:hover {
     transform: scale(1.05);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
+/* Unique gradient backgrounds for each destination card */
 .destination-card:nth-child(1) { background: linear-gradient(135deg, #2a9d8f 0%, #264653 100%); }
 .destination-card:nth-child(2) { background: linear-gradient(135deg, #e76f51 0%, #f4a261 100%); }
 .destination-card:nth-child(3) { background: linear-gradient(135deg, #457b9d 0%, #1d3557 100%); }
 .destination-card:nth-child(4) { background: linear-gradient(135deg, #e63946 0%, #a8dadc 100%); }
 
-/* Testimonials */
+/* ============================================ */
+/* TESTIMONIALS SECTION                         */
+/* ============================================ */
+/* Grid layout for testimonial cards */
 .testimonial-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
 }
 
+/* Individual testimonial card */
 .testimonial {
     background: white;
     padding: 30px;
@@ -367,6 +456,7 @@ h1 {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
+/* Testimonial quote text */
 .testimonial-text {
     font-style: italic;
     color: var(--text-dark);
@@ -374,12 +464,16 @@ h1 {
     line-height: 1.7;
 }
 
+/* Testimonial author name */
 .testimonial-author {
     font-weight: 600;
     color: var(--primary-blue);
 }
 
-/* Services Page */
+/* ============================================ */
+/* SERVICES PAGE SPECIFIC STYLES                */
+/* ============================================ */
+/* Service category container (used on services page) */
 .service-category {
     background: white;
     padding: 40px;
@@ -389,11 +483,13 @@ h1 {
     transition: all 0.3s ease;
 }
 
+/* Service category hover effect */
 .service-category:hover {
     border-color: var(--accent-teal);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
+/* Service header with icon and title */
 .service-header {
     display: flex;
     align-items: center;
@@ -401,6 +497,7 @@ h1 {
     margin-bottom: 25px;
 }
 
+/* Large icon for service categories */
 .service-icon-large {
     width: 80px;
     height: 80px;
@@ -413,31 +510,38 @@ h1 {
     color: white;
 }
 
+/* Service category heading (H3) */
 .service-category h3 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
     color: var(--primary-blue);
 }
 
+/* Grid for service details/features */
 .service-details {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
 }
 
+/* Individual service feature box */
 .service-feature {
     padding: 20px;
     background: var(--warm-sand);
     border-radius: 10px;
 }
 
+/* Service feature heading (H4) */
 .service-feature h4 {
     color: var(--deep-ocean);
     margin-bottom: 10px;
     font-weight: 600;
 }
 
-/* Contact Page */
+/* ============================================ */
+/* CONTACT PAGE LAYOUT                          */
+/* ============================================ */
+/* Two-column layout for contact page */
 .contact-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -445,6 +549,7 @@ h1 {
     padding: 60px 40px;
 }
 
+/* Left column - Contact information box */
 .contact-info {
     background: var(--primary-blue);
     color: white;
@@ -452,12 +557,14 @@ h1 {
     border-radius: 15px;
 }
 
+/* Contact info section heading */
 .contact-info h3 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
     margin-bottom: 30px;
 }
 
+/* Individual contact information item */
 .info-item {
     display: flex;
     align-items: center;
@@ -468,6 +575,7 @@ h1 {
     border-radius: 10px;
 }
 
+/* Icon circle for contact methods */
 .info-icon {
     width: 50px;
     height: 50px;
@@ -479,6 +587,10 @@ h1 {
     font-size: 1.5rem;
 }
 
+/* ============================================ */
+/* CONTACT FORM STYLES                          */
+/* ============================================ */
+/* Right column - Inquiry form container */
 .inquiry-form {
     background: white;
     padding: 50px;
@@ -486,6 +598,7 @@ h1 {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
+/* Inquiry form heading */
 .inquiry-form h3 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
@@ -493,10 +606,12 @@ h1 {
     margin-bottom: 30px;
 }
 
+/* Form field container */
 .form-group {
     margin-bottom: 25px;
 }
 
+/* Form field labels */
 .form-group label {
     display: block;
     color: var(--text-dark);
@@ -504,6 +619,7 @@ h1 {
     margin-bottom: 8px;
 }
 
+/* Form inputs, selects, and textareas */
 .form-group input,
 .form-group select,
 .form-group textarea {
@@ -516,6 +632,7 @@ h1 {
     transition: border-color 0.3s ease;
 }
 
+/* Form field focus state */
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
@@ -523,11 +640,13 @@ h1 {
     border-color: var(--accent-teal);
 }
 
+/* Textarea specific styling */
 .form-group textarea {
     resize: vertical;
     min-height: 120px;
 }
 
+/* Form submit button */
 .submit-btn {
     width: 100%;
     padding: 18px;
@@ -541,13 +660,17 @@ h1 {
     transition: all 0.3s ease;
 }
 
+/* Submit button hover effect */
 .submit-btn:hover {
     background: var(--primary-blue);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(42, 157, 143, 0.3);
 }
 
-/* Footer */
+/* ============================================ */
+/* FOOTER STYLES                                */
+/* ============================================ */
+/* Footer container */
 .footer {
     background: var(--deep-ocean);
     color: white;
@@ -555,6 +678,7 @@ h1 {
     text-align: center;
 }
 
+/* Footer navigation links container */
 .footer-links {
     display: flex;
     justify-content: center;
@@ -563,61 +687,78 @@ h1 {
     flex-wrap: wrap;
 }
 
+/* Individual footer link */
 .footer-link {
     color: white;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
+/* Footer link hover effect */
 .footer-link:hover {
     color: var(--accent-teal);
 }
 
-/* Mobile Responsive */
+/* ============================================ */
+/* MOBILE RESPONSIVE STYLES                     */
+/* ============================================ */
+/* Styles for screens 768px and smaller */
 @media (max-width: 768px) {
+    /* Stack navigation vertically on mobile */
     .navbar {
         flex-direction: column;
         gap: 20px;
         padding: 20px;
     }
 
+    /* Navigation links stack vertically */
     .nav-links {
         flex-direction: column;
         gap: 15px;
         width: 100%;
     }
 
+    /* Full-width navigation links */
     .nav-link {
         width: 100%;
         text-align: center;
     }
 
+    /* Smaller hero heading on mobile */
     .hero h2 {
         font-size: 2rem;
     }
 
+    /* Smaller hero paragraph on mobile */
     .hero p {
         font-size: 1.1rem;
     }
 
+    /* Single column contact layout on mobile */
     .contact-layout {
         grid-template-columns: 1fr;
     }
 
+    /* Single column card grid on mobile */
     .card-grid {
         grid-template-columns: 1fr;
     }
 
+    /* Smaller H1 on mobile */
     h1 {
         font-size: 2rem;
     }
 
+    /* Smaller section titles on mobile */
     .section-title {
         font-size: 1.8rem;
     }
 }
 
-/* Annotations */
+/* ============================================ */
+/* DESIGN ANNOTATIONS                           */
+/* ============================================ */
+/* Annotation boxes explaining design decisions (visible in wireframe) */
 .annotation {
     background: #fff3cd;
     border-left: 4px solid #ffc107;
@@ -627,6 +768,7 @@ h1 {
     font-size: 0.95rem;
 }
 
+/* Bold text within annotations */
 .annotation strong {
     color: #856404;
 }

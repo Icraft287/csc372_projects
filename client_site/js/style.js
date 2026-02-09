@@ -1,3 +1,14 @@
+/*
+    Author: Isaac Craft
+    Date: February 8, 2026
+    Description: JavaScript for T's Travel Agency Website - Handles navigation 
+    between different wireframe pages (homepage, services, contact) with smooth transitions 
+    and scroll behavior.
+    
+    AI Usage: Claude AI (Anthropic) was used to assist with adding documentation comments 
+    to this JavaScript file to improve code readability and maintainability.
+*/
+
 function showWireframe(pageId) {
     // Hide all wireframes
     const wireframes = document.querySelectorAll('.wireframe');
