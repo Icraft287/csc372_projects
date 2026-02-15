@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!-- 
+    File: contact.html
+    Author: Isaac Crft
+    Date: February 14, 2026
+    Description: Contact page for T's Travel – contact details, business info, and inquiry form
+    AI help: Got help with form structure, making sure required fields and labels were clear, 
+             and fixing the two-column layout for contact info + form.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact T's Travel - Get in touch to start planning your dream vacation today">
+    <title>Contact Us - T's Travel</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <div class="logo-icon" aria-hidden="true">✈️</div>
+            <span>T's Travel</span>
+        </a>
+        <div class="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="destinations.html" class="nav-link">Destinations</a>
+            <a href="contact.html" class="contact-btn active">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- Hero section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Get in Touch</h1>
+            <p>Let's start planning your perfect vacation</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- Contact layout – info + form side by side -->
+        <section class="contact-layout">
+            <!-- Contact information block -->
+            <div class="contact-info">
+                <h2>Contact Information</h2>
+                <p style="margin-bottom: 30px; line-height: 1.8;">We're here to help you plan the vacation of your dreams. Reach out to us using any of the methods below, and we'll respond promptly to discuss your travel needs.</p>
+
+                <!-- Phone info -->
+                <div class="info-item">
+                    <div class="info-icon" aria-hidden="true">📞</div>
+                    <div>
+                        <strong style="display: block; margin-bottom: 5px;">Phone</strong>
+                        <a href="tel:5551234567" style="color: white; text-decoration: none;">(555) 123-4567</a><br>
+                        <span style="font-size: 0.9rem; opacity: 0.8;">Monday - Saturday, 9 AM - 6 PM</span>
+                    </div>
+                </div>
+
+                <!-- Email info -->
+                <div class="info-item">
+                    <div class="info-icon" aria-hidden="true">📧</div>
+                    <div>
+                        <strong style="display: block; margin-bottom: 5px;">Email</strong>
+                        <a href="mailto:info@tstravel.com" style="color: white; text-decoration: none;">info@tstravel.com</a><br>
+                        <span style="font-size: 0.9rem; opacity: 0.8;">We respond within 24 hours</span>
+                    </div>
+                </div>
+
+                <!-- Location info -->
+                <div class="info-item">
+                    <div class="info-icon" aria-hidden="true">📍</div>
+                    <div>
+                        <strong style="display: block; margin-bottom: 5px;">Office Location</strong>
+                        <span>123 Travel Lane, Suite 456</span><br>
+                        <span>Wanderlust City, ST 12345</span>
+                    </div>
+                </div>
+
+                <!-- Business hours -->
+                <div class="info-item">
+                    <div class="info-icon" aria-hidden="true">⏰</div>
+                    <div>
+                        <strong style="display: block; margin-bottom: 5px;">Business Hours</strong>
+                        <span>Monday - Friday: 9:00 AM - 6:00 PM</span><br>
+                        <span>Saturday: 10:00 AM - 3:00 PM</span><br>
+                        <span>Sunday: Closed</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Travel inquiry form -->
+            <div class="inquiry-form">
+                <h2>Travel Inquiry Form</h2>
+                <p style="color: var(--text-dark); margin-bottom: 25px;">Tell us about your dream vacation and we'll get back to you with personalized recommendations.</p>
+
+                <form>
+                    <!-- Name field -->
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="John Smith" aria-required="true">
+                    </div>
+
+                    <!-- Email field -->
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="john@example.com" aria-required="true">
+                    </div>
+
+                    <!-- Phone field -->
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567" aria-required="true">
+                    </div>
+
+                    <!-- Service type dropdown -->
+                    <div class="form-group">
+                        <label for="service">Type of Service *</label>
+                        <select id="service" name="service" required aria-required="true">
+                            <option value="">Select a service...</option>
+                            <option value="cruise">Cruise Vacation</option>
+                            <option value="all-inclusive">All-Inclusive Resort</option>
+                            <option value="group">Group Travel</option>
+                            <option value="custom">Custom Trip Planning</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Destination field -->
+                    <div class="form-group">
+                        <label for="destination">Preferred Destination</label>
+                        <input type="text" id="destination" name="destination" placeholder="e.g., Caribbean, Europe, Asia">
+                    </div>
+
+                    <!-- Travel dates field -->
+                    <div class="form-group">
+                        <label for="dates">Preferred Travel Dates</label>
+                        <input type="text" id="dates" name="dates" placeholder="e.g., June 2026">
+                    </div>
+
+                    <!-- Number of travelers -->
+                    <div class="form-group">
+                        <label for="travelers">Number of Travelers</label>
+                        <input type="number" id="travelers" name="travelers" min="1" placeholder="2">
+                    </div>
+
+                    <!-- Budget dropdown -->
+                    <div class="form-group">
+                        <label for="budget">Approximate Budget (Optional)</label>
+                        <select id="budget" name="budget">
+                            <option value="">Select budget range...</option>
+                            <option value="under-2000">Under $2,000</option>
+                            <option value="2000-5000">$2,000 - $5,000</option>
+                            <option value="5000-10000">$5,000 - $10,000</option>
+                            <option value="over-10000">Over $10,000</option>
+                        </select>
+                    </div>
+
+                    <!-- Message textarea -->
+                    <div class="form-group">
+                        <label for="message">Additional Details</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your travel preferences, special requests, or any questions you have..."></textarea>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="submit-btn">Submit Inquiry</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Alternative contact CTA -->
+        <section class="content-section" style="text-align: center; background: var(--warm-sand); padding: 60px 40px;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary-blue); margin-bottom: 15px;">Prefer to Talk First?</h2>
+            <p style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 25px;">Give us a call and let's discuss your travel plans over the phone</p>
+            <a href="tel:5551234567" class="cta-button">📞 Call Now: (555) 123-4567</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <nav class="footer-links" aria-label="Footer navigation">
+            <a href="index.html" class="footer-link">Home</a>
+            <a href="about.html" class="footer-link">About</a>
+            <a href="services.html" class="footer-link">Services</a>
+            <a href="destinations.html" class="footer-link">Destinations</a>
+            <a href="contact.html" class="footer-link">Contact</a>
+        </nav>
+        <div class="footer-bottom">
+            <p>&copy; 2026 T's Travel. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" class="social-link" aria-label="Visit our Facebook page">Facebook</a>
+                <a href="#" class="social-link" aria-label="Visit our Instagram page">Instagram</a>
+                <a href="#" class="social-link" aria-label="Visit our Twitter page">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>

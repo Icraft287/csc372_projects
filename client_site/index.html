@@ -1,623 +1,139 @@
-<!--
-    Author: Isaac Craft
-    Date: February 8, 2026
-    Description: Travel Agent Website Homepage - Interactive mockup showcasing homepage, 
-    services page, and contact page designs for T's Travel agency. Features responsive 
-    layouts, navigation system, service cards, testimonials, and contact forms.
-    
-    AI Usage: Claude AI (Anthropic) was used to assist with adding documentation comments 
-    throughout this HTML file to improve code readability and maintainability.
--->
-
 <!DOCTYPE html>
+<!-- 
+    File: index.html
+    Author: Isaac Crft
+    Date: February 14, 2026
+    Description: Main homepage for T's Travel - travel planning services website
+    AI usage: Used AI for help linking CSS and JS files correctly, generating some layout ideas, 
+              and getting unstuck on navigation and card styling. 
+              Updated: Added Unsplash API integration for dynamic hero backgrounds
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Agent Website Wireframes</title>
+    <meta name="description" content="T's Travel - Professional travel planning services for cruises, all-inclusive vacations, group travel, and custom trip planning">
+    <title>T's Travel - Your Dream Vacation Awaits</title>
     
-    <!-- Google Fonts: Playfair Display for headings, Lato for body text -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     
-    <!-- External stylesheet for custom styling -->
+    <!-- Main stylesheet ) -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="content">
 
-        <!-- Main site title -->
-        <h1> T's Travel </h1>
-        
-
-        <!-- Page navigation tabs for switching between wireframes -->
-        <div class="page-tabs">
-            <button class="tab-btn active" onclick="showWireframe('homepage')">Homepage</button>
-            <button class="tab-btn" onclick="showWireframe('services')">Services</button>
-            <button class="tab-btn" onclick="showWireframe('contact')">Contact</button>
-        </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <span>T's Travel</span>
+        </a>
 
         <!-- Client logo display section -->
         <div class="logo-section">
             <img src="images/client_logo.png" alt="Client Logo" class="client-logo">
         </div>
+        
+        <!-- Hamburger menu toggle (mobile) -->
+        <div class="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <!-- Main navigation links -->
+        <div class="nav-links">
+            <a href="index.html" class="nav-link active">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="destinations.html" class="nav-link">Destinations</a>
+            <a href="contact.html" class="contact-btn">Contact Us</a>
+        </div>
+    </nav>
 
-        <!-- ============================================ -->
-        <!-- HOMEPAGE WIREFRAME                           -->
-        <!-- ============================================ -->
-        <div id="homepage" class="wireframe active">
-            
-            <!-- Top Navigation Bar -->
-            <div class="navbar">
-                <div class="logo">
-                    <div class="logo-icon">✈️</div>
-                    
-                </div>
-                <div class="nav-links">
-                    <a href="#" class="nav-link">Home</a>
-                    <a href="#" class="nav-link">About</a>
-                    <a href="#" class="nav-link dropdown">Services</a>
-                    <a href="#" class="nav-link dropdown">Destinations</a>
-                    <a href="#" class="nav-link">Testimonials</a>
-                    <button class="contact-btn">Contact Us</button>
-                </div>
-            </div>
+    <!-- Hero Section with Dynamic Unsplash Background -->
+    <header class="hero" id="hero-section">
+        <div class="hero-content">
+            <h1>Your Dream Vacation Awaits</h1>
+            <p>Personalized travel planning with expert guidance every step of the way</p>
+            <a href="contact.html" class="cta-button">Plan Your Trip</a>
+        </div>
+        <!-- Photo attribution for Unsplash -->
+        <div class="photo-credit" id="photo-credit" style="display: none;"></div>
+    </header>
 
-            <!-- Design annotation explaining navigation structure -->
-            <div class="annotation">
-                <strong>Navigation Design:</strong> Fixed navigation bar with logo on left, menu items center-right, and prominent "Contact Us" button. Dropdown indicators (▼) for Services and Destinations. Mobile-responsive with hamburger menu layout.
-            </div>
-
-            <!-- Hero/Banner Section -->
-            <div class="hero">
-                <div class="hero-content">
-                    <h2>Your Dream Vacation Awaits</h2>
-                    <p>Personalized travel planning with expert guidance every step of the way</p>
-                    <button class="cta-button">Plan Your Trip</button>
-                </div>
-            </div>
-
-            <!-- Design annotation explaining hero section -->
-            <div class="annotation">
-                <strong>Hero Section:</strong> Eye-catching gradient background with welcoming headline, brief value proposition, and clear call-to-action button. Background decoration creates visual interest without clutter.
-            </div>
-
-            <!-- Services Overview Section -->
-            <div class="content-section">
-                <h2 class="section-title">Our Services</h2>
+    <main>
+        <!-- Services Section -->
+        <section class="content-section">
+            <h2 class="section-title">Our Services</h2>
+            <div class="card-grid">
+                <article class="card">
+                    <div class="card-icon" aria-hidden="true">🚢</div>
+                    <h3>Cruises</h3>
+                    <p>Explore the world's oceans with carefully curated cruise experiences</p>
+                </article>
                 
-                <!-- Grid layout displaying four main service offerings -->
-                <div class="card-grid">
-                    <!-- Service Card: Cruises -->
-                    <div class="card">
-                        <div class="card-icon">🚢</div>
-                        <h3>Cruises</h3>
-                        <p>Explore the world's oceans with carefully curated cruise experiences</p>
-                    </div>
-                    
-                    <!-- Service Card: All-Inclusive Vacations -->
-                    <div class="card">
-                        <div class="card-icon">🏖️</div>
-                        <h3>All-Inclusive Vacations</h3>
-                        <p>Stress-free getaways with everything included</p>
-                    </div>
-                    
-                    <!-- Service Card: Group Travel -->
-                    <div class="card">
-                        <div class="card-icon">👥</div>
-                        <h3>Group Travel</h3>
-                        <p>Perfect trips for families, friends, and organizations</p>
-                    </div>
-                    
-                    <!-- Service Card: Custom Planning -->
-                    <div class="card">
-                        <div class="card-icon">✨</div>
-                        <h3>Custom Planning</h3>
-                        <p>Tailored itineraries designed just for you</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Design annotation explaining services section -->
-            <div class="annotation">
-                <strong>Services Overview:</strong> Grid layout showcasing four main service categories with icons, headings, and brief descriptions. Cards have hover effects for interactivity. Responsive grid adjusts for mobile devices.
-            </div>
-
-            <!-- Popular Destinations Section -->
-            <div class="content-section" style="background: var(--warm-sand);">
-                <h2 class="section-title">Popular Destinations</h2>
+                <article class="card">
+                    <div class="card-icon" aria-hidden="true">🏖️</div>
+                    <h3>All-Inclusive Vacations</h3>
+                    <p>Stress-free getaways with everything included</p>
+                </article>
                 
-                <!-- Grid displaying top destination categories -->
-                <div class="destination-grid">
-                    <div class="destination-card">🌴 Caribbean</div>
-                    <div class="destination-card">🗼 Europe</div>
-                    <div class="destination-card">🚢 Cruises</div>
-                    <div class="destination-card">💑 Romantic Getaways</div>
-                </div>
-            </div>
-
-            <!-- Design annotation explaining destinations section -->
-            <div class="annotation">
-                <strong>Destination Highlights:</strong> Visual cards with gradient backgrounds representing different travel categories. Interactive hover effects to engage users. Links to detailed destination pages.
-            </div>
-
-            <!-- Client Testimonials Section -->
-            <div class="content-section">
-                <h2 class="section-title">What Our Clients Say</h2>
+                <article class="card">
+                    <div class="card-icon" aria-hidden="true">👥</div>
+                    <h3>Group Travel</h3>
+                    <p>Perfect trips for families, friends, and organizations</p>
+                </article>
                 
-                <!-- Container for testimonial cards -->
-                <div class="testimonial-container">
-                    <!-- Testimonial 1: Italy Trip -->
-                    <div class="testimonial">
-                        <p class="testimonial-text">"Amazing service! Our trip to Italy was perfectly planned down to every detail. Couldn't have asked for a better experience."</p>
-                        <p class="testimonial-author">- Sarah & Michael T.</p>
-                    </div>
-                    
-                    <!-- Testimonial 2: Family Cruise -->
-                    <div class="testimonial">
-                        <p class="testimonial-text">"The cruise they arranged for our family reunion was unforgettable. Everyone had a wonderful time!"</p>
-                        <p class="testimonial-author">- Johnson Family</p>
-                    </div>
-                    
-                    <!-- Testimonial 3: Honeymoon -->
-                    <div class="testimonial">
-                        <p class="testimonial-text">"Professional, knowledgeable, and truly cared about making our honeymoon special. Highly recommend!"</p>
-                        <p class="testimonial-author">- Emily & David R.</p>
-                    </div>
-                </div>
+                <article class="card">
+                    <div class="card-icon" aria-hidden="true">✨</div>
+                    <h3>Custom Planning</h3>
+                    <p>Tailored itineraries designed just for you</p>
+                </article>
             </div>
+        </section>
 
-            <!-- Design annotation explaining testimonials section -->
-            <div class="annotation">
-                <strong>Testimonials Preview:</strong> Three featured testimonials in card format with quotes and client names. Clean, readable design builds trust and credibility. Link to full testimonials page.
+        <!-- Popular Destinations Section -->
+        <section class="content-section" style="background: var(--warm-sand);">
+            <h2 class="section-title">Popular Destinations</h2>
+            <div class="destination-grid">
+                <a href="destinations.html#caribbean" class="destination-card">🌴 Caribbean</a>
+                <a href="destinations.html#europe" class="destination-card">🗼 Europe</a>
+                <a href="destinations.html#cruises" class="destination-card">🚢 Cruises</a>
+                <a href="destinations.html#romantic" class="destination-card">💑 Romantic Getaways</a>
             </div>
+        </section>
 
-            <!-- Final Call-to-Action Section -->
-            <div class="content-section" style="text-align: center; background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-teal) 100%); color: white; padding: 80px 40px;">
-                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 20px;">Ready to Start Your Adventure?</h2>
-                <p style="font-size: 1.2rem; margin-bottom: 30px; opacity: 0.95;">Let's create your perfect travel experience together</p>
-                <button class="cta-button">Get Started Today</button>
-            </div>
 
-            <!-- Design annotation explaining CTA section -->
-            <div class="annotation">
-                <strong>Call-to-Action Section:</strong> Prominent CTA section with contrasting background, compelling headline, and action button. Encourages users to contact the agency.
-            </div>
 
-            <!-- Footer Section -->
-            <div class="footer">
-                <!-- Footer navigation links -->
-                <div class="footer-links">
-                    <a href="#" class="footer-link">Home</a>
-                    <a href="#" class="footer-link">About</a>
-                    <a href="#" class="footer-link">Services</a>
-                    <a href="#" class="footer-link">Destinations</a>
-                    <a href="#" class="footer-link">Testimonials</a>
-                    <a href="#" class="footer-link">Contact</a>
-                </div>
-                
-                <!-- Copyright and social media section -->
-                <div class="footer-bottom">
-                    <p>&copy; 2024 T's Travel. All rights reserved.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link">Facebook</a>
-                        <a href="#" class="social-link">Instagram</a>
-                        <a href="#" class="social-link">Twitter</a>
-                    </div>
-                </div>
-            </div>
+        <!-- Call to Action Section -->
+        <section class="content-section" style="background: var(--warm-sand); text-align: center;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px;">Ready to Start Planning?</h2>
+            <p style="font-size: 1.2rem; color: var(--text-dark); margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto;">Let us help you create unforgettable memories. Contact us today to begin planning your perfect vacation.</p>
+            <a href="contact.html" class="cta-button">Get Started</a>
+        </section>
+    </main>
 
-            <!-- Design annotation explaining footer -->
-            <div class="annotation">
-                <strong>Footer Design:</strong> Clean footer with navigation links, copyright notice, and social media links. Provides easy access to key pages and builds brand presence through social channels.
+    <!-- Footer -->
+    <footer class="footer">
+        <nav class="footer-links" aria-label="Footer navigation">
+            <a href="index.html" class="footer-link">Home</a>
+            <a href="about.html" class="footer-link">About</a>
+            <a href="services.html" class="footer-link">Services</a>
+            <a href="destinations.html" class="footer-link">Destinations</a>
+            <a href="contact.html" class="footer-link">Contact</a>
+        </nav>
+        <div class="footer-bottom">
+            <p>© 2026 T's Travel. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" class="social-link" aria-label="Visit our Facebook page">Facebook</a>
+                <a href="#" class="social-link" aria-label="Visit our Instagram page">Instagram</a>
+                <a href="#" class="social-link" aria-label="Visit our Twitter page">Twitter</a>
             </div>
         </div>
+    </footer>
 
-        <!-- ============================================ -->
-        <!-- SERVICES PAGE WIREFRAME                      -->
-        <!-- ============================================ -->
-        <div id="services" class="wireframe">
-            
-            <!-- Services Page Navigation Bar -->
-            <div class="navbar">
-                <div class="logo">
-                    <div class="logo-icon">✈️</div>
-                    
-                </div>
-                <div class="nav-links">
-                    <a href="#" class="nav-link">Home</a>
-                    <a href="#" class="nav-link">About</a>
-                    <a href="#" class="nav-link dropdown active">Services</a>
-                    <a href="#" class="nav-link dropdown">Destinations</a>
-                    <a href="#" class="nav-link">Testimonials</a>
-                    <button class="contact-btn">Contact Us</button>
-                </div>
-            </div>
-
-            <!-- Services Page Hero -->
-            <div class="hero" style="background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-teal) 100%);">
-                <div class="hero-content">
-                    <h2>Travel Services Tailored to You</h2>
-                    <p>From cruises to custom adventures - we handle every detail</p>
-                </div>
-            </div>
-
-            <!-- Design annotation explaining services hero -->
-            <div class="annotation">
-                <strong>Services Page Header:</strong> Inviting header that sets expectations and communicates the value of personalized service.
-            </div>
-
-            <!-- Detailed Services Section -->
-            <div class="content-section">
-                <h2 class="section-title">Our Complete Service Offerings</h2>
-                
-                <!-- Services list with detailed descriptions -->
-                <div class="services-list">
-                    <!-- Service: Cruise Vacations -->
-                    <div class="service-item">
-                        <div class="service-icon">🚢</div>
-                        <div class="service-content">
-                            <h3>Cruise Vacations</h3>
-                            <p>Whether you dream of sailing the Caribbean, exploring Alaska's glaciers, or discovering the Mediterranean, we'll find the perfect cruise for you. We work with all major cruise lines and can secure the best rates and cabin locations.</p>
-                            <ul class="service-features">
-                                <li>All major cruise lines available</li>
-                                <li>Exclusive group rates and amenities</li>
-                                <li>Pre and post-cruise hotel arrangements</li>
-                                <li>Shore excursion planning</li>
-                            </ul>
-                            <button class="learn-more-btn">Learn More</button>
-                        </div>
-                    </div>
-
-                    <!-- Service: All-Inclusive Resorts -->
-                    <div class="service-item">
-                        <div class="service-icon">🏖️</div>
-                        <div class="service-content">
-                            <h3>All-Inclusive Resort Packages</h3>
-                            <p>Relax and enjoy without worrying about a thing. Our all-inclusive packages cover accommodations, meals, drinks, activities, and entertainment. Perfect for stress-free family vacations or romantic getaways.</p>
-                            <ul class="service-features">
-                                <li>Top resorts in Caribbean, Mexico, and beyond</li>
-                                <li>Adults-only and family-friendly options</li>
-                                <li>Resort credits and room upgrades</li>
-                                <li>Special honeymoon and anniversary packages</li>
-                            </ul>
-                            <button class="learn-more-btn">Learn More</button>
-                        </div>
-                    </div>
-
-                    <!-- Service: Group Travel -->
-                    <div class="service-item">
-                        <div class="service-icon">👥</div>
-                        <div class="service-content">
-                            <h3>Group Travel Coordination</h3>
-                            <p>Planning a trip for family, friends, or colleagues? We specialize in group travel logistics, ensuring everyone has a seamless experience. From family reunions to corporate retreats, we handle it all.</p>
-                            <ul class="service-features">
-                                <li>Customized group itineraries</li>
-                                <li>Coordinated bookings and payments</li>
-                                <li>Group discounts and perks</li>
-                                <li>On-site support and coordination</li>
-                            </ul>
-                            <button class="learn-more-btn">Learn More</button>
-                        </div>
-                    </div>
-
-                    <!-- Service: Custom Trip Planning -->
-                    <div class="service-item">
-                        <div class="service-icon">✨</div>
-                        <div class="service-content">
-                            <h3>Custom Trip Planning</h3>
-                            <p>Have a unique vision for your vacation? We create completely customized itineraries tailored to your interests, budget, and travel style. From multi-city European tours to exotic adventures, we bring your dreams to life.</p>
-                            <ul class="service-features">
-                                <li>Personalized itinerary design</li>
-                                <li>Flight and accommodation booking</li>
-                                <li>Activity and tour arrangements</li>
-                                <li>24/7 travel support</li>
-                            </ul>
-                            <button class="learn-more-btn">Learn More</button>
-                        </div>
-                    </div>
-
-                    <!-- Service: Destination Weddings & Honeymoons -->
-                    <div class="service-item">
-                        <div class="service-icon">💒</div>
-                        <div class="service-content">
-                            <h3>Destination Weddings & Honeymoons</h3>
-                            <p>Make your special day unforgettable with a destination wedding or romantic honeymoon. We coordinate every detail, from venue selection to guest accommodations, so you can focus on celebrating.</p>
-                            <ul class="service-features">
-                                <li>Venue research and booking</li>
-                                <li>Guest travel coordination</li>
-                                <li>Vendor recommendations</li>
-                                <li>Honeymoon suite upgrades</li>
-                            </ul>
-                            <button class="learn-more-btn">Learn More</button>
-                        </div>
-                    </div>
-
-                    <!-- Service: Travel Insurance -->
-                    <div class="service-item">
-                        <div class="service-icon">🛡️</div>
-                        <div class="service-content">
-                            <h3>Travel Insurance & Protection</h3>
-                            <p>Protect your investment with comprehensive travel insurance. We offer various coverage options to give you peace of mind, including trip cancellation, medical emergencies, and lost luggage protection.</p>
-                            <ul class="service-features">
-                                <li>Multiple coverage plan options</li>
-                                <li>Cancel for any reason policies</li>
-                                <li>Medical and evacuation coverage</li>
-                                <li>24/7 emergency assistance</li>
-                            </ul>
-                            <button class="learn-more-btn">Learn More</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Design annotation explaining services list -->
-            <div class="annotation">
-                <strong>Detailed Services Section:</strong> Comprehensive breakdown of each service offering with icons, descriptions, bullet-point features, and action buttons. Designed to inform and convert potential clients.
-            </div>
-
-            <!-- Why Choose Us Section -->
-            <div class="content-section" style="background: var(--warm-sand);">
-                <h2 class="section-title">Why Book with T's Travel?</h2>
-                
-                <!-- Benefits grid -->
-                <div class="benefits-grid">
-                    <!-- Benefit: Expert Knowledge -->
-                    <div class="benefit-card">
-                        <h3>🎓 Expert Knowledge</h3>
-                        <p>Our agents have decades of combined experience and extensive destination knowledge</p>
-                    </div>
-                    
-                    <!-- Benefit: Best Value -->
-                    <div class="benefit-card">
-                        <h3>💰 Best Value</h3>
-                        <p>Access to exclusive rates and promotions you won't find online</p>
-                    </div>
-                    
-                    <!-- Benefit: Personal Service -->
-                    <div class="benefit-card">
-                        <h3>🤝 Personal Service</h3>
-                        <p>Dedicated support before, during, and after your trip</p>
-                    </div>
-                    
-                    <!-- Benefit: Time Savings -->
-                    <div class="benefit-card">
-                        <h3>⏱️ Time Savings</h3>
-                        <p>We handle all the research and booking so you don't have to</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Design annotation explaining benefits section -->
-            <div class="annotation">
-                <strong>Why Choose Us Section:</strong> Highlights key differentiators and value propositions in an easy-to-scan grid format. Builds trust and addresses potential customer objections.
-            </div>
-
-            <!-- CTA for Services -->
-            <div class="content-section" style="text-align: center; padding: 80px 40px;">
-                <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px;">Ready to Start Planning?</h2>
-                <p style="font-size: 1.2rem; color: var(--text-dark); margin-bottom: 30px;">Let us create the perfect vacation package for you</p>
-                <button class="cta-button">Contact Us Today</button>
-            </div>
-
-            <!-- Footer -->
-            <div class="footer">
-                <div class="footer-links">
-                    <a href="#" class="footer-link">Home</a>
-                    <a href="#" class="footer-link">About</a>
-                    <a href="#" class="footer-link">Services</a>
-                    <a href="#" class="footer-link">Destinations</a>
-                    <a href="#" class="footer-link">Testimonials</a>
-                    <a href="#" class="footer-link">Contact</a>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2024 T's Travel. All rights reserved.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link">Facebook</a>
-                        <a href="#" class="social-link">Instagram</a>
-                        <a href="#" class="social-link">Twitter</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ============================================ -->
-        <!-- CONTACT PAGE WIREFRAME                       -->
-        <!-- ============================================ -->
-        <div id="contact" class="wireframe">
-            
-            <!-- Contact Page Navigation Bar -->
-            <div class="navbar">
-                <div class="logo">
-                    <div class="logo-icon">✈️</div>
-                    
-                </div>
-                <div class="nav-links">
-                    <a href="#" class="nav-link">Home</a>
-                    <a href="#" class="nav-link">About</a>
-                    <a href="#" class="nav-link dropdown">Services</a>
-                    <a href="#" class="nav-link dropdown">Destinations</a>
-                    <a href="#" class="nav-link">Testimonials</a>
-                    <button class="contact-btn active">Contact Us</button>
-                </div>
-            </div>
-
-            <!-- Contact Page Hero -->
-            <div class="hero" style="background: linear-gradient(135deg, var(--accent-teal) 0%, var(--primary-blue) 100%);">
-                <div class="hero-content">
-                    <h2>Get in Touch</h2>
-                    <p>We're here to help plan your perfect getaway</p>
-                </div>
-            </div>
-
-            <!-- Design annotation explaining contact hero -->
-            <div class="annotation">
-                <strong>Contact Page Header:</strong> Welcoming header encouraging user contact with friendly, approachable messaging.
-            </div>
-
-            <!-- Contact Information and Form Layout -->
-            <div class="contact-layout">
-                
-                <!-- Left Column: Contact Information -->
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <p style="margin-bottom: 30px; opacity: 0.9;">Reach out through any of these channels - we're ready to help!</p>
-                    
-                    <!-- Contact Method: Phone -->
-                    <div class="info-item">
-                        <div class="info-icon">📞</div>
-                        <div>
-                            <strong style="display: block; margin-bottom: 5px;">Phone</strong>
-                            <span>(555) 123-4567</span><br>
-                            <span style="font-size: 0.9rem; opacity: 0.8;">Mon-Fri: 9am-6pm EST</span>
-                        </div>
-                    </div>
-
-                    <!-- Contact Method: Email -->
-                    <div class="info-item">
-                        <div class="info-icon">📧</div>
-                        <div>
-                            <strong style="display: block; margin-bottom: 5px;">Email</strong>
-                            <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cda4a3aba28db4a2b8bfb9bfacbba8a1acaaa8a3aeb4e3aea2a0">[email&#160;protected]</a></span><br>
-                            <span style="font-size: 0.9rem; opacity: 0.8;">We respond within 24 hours</span>
-                        </div>
-                    </div>
-
-                    <!-- Contact Method: Office Location -->
-                    <div class="info-item">
-                        <div class="info-icon">📍</div>
-                        <div>
-                            <strong style="display: block; margin-bottom: 5px;">Office Location</strong>
-                            <span>123 Travel Lane, Suite 456</span><br>
-                            <span>Wanderlust City, ST 12345</span>
-                        </div>
-                    </div>
-
-                    <!-- Contact Method: Business Hours -->
-                    <div class="info-item">
-                        <div class="info-icon">⏰</div>
-                        <div>
-                            <strong style="display: block; margin-bottom: 5px;">Business Hours</strong>
-                            <span>Monday - Friday: 9:00 AM - 6:00 PM</span><br>
-                            <span>Saturday: 10:00 AM - 3:00 PM</span><br>
-                            <span>Sunday: Closed</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column: Travel Inquiry Form -->
-                <div class="inquiry-form">
-                    <h3>Travel Inquiry Form</h3>
-                    <p style="color: var(--text-dark); margin-bottom: 25px;">Tell us about your dream vacation and we'll get back to you with personalized recommendations.</p>
-
-                    <form>
-                        <!-- Form Field: Name -->
-                        <div class="form-group">
-                            <label for="name">Your Name *</label>
-                            <input type="text" id="name" name="name" required placeholder="John Smith">
-                        </div>
-
-                        <!-- Form Field: Email -->
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required placeholder="john@example.com">
-                        </div>
-
-                        <!-- Form Field: Phone -->
-                        <div class="form-group">
-                            <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
-                        </div>
-
-                        <!-- Form Field: Service Type Selection -->
-                        <div class="form-group">
-                            <label for="service">Type of Service *</label>
-                            <select id="service" name="service" required>
-                                <option value="">Select a service...</option>
-                                <option value="cruise">Cruise Vacation</option>
-                                <option value="all-inclusive">All-Inclusive Resort</option>
-                                <option value="group">Group Travel</option>
-                                <option value="custom">Custom Trip Planning</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-
-                        <!-- Form Field: Destination Preference -->
-                        <div class="form-group">
-                            <label for="destination">Preferred Destination</label>
-                            <input type="text" id="destination" name="destination" placeholder="e.g., Caribbean, Europe, Asia">
-                        </div>
-
-                        <!-- Form Field: Travel Dates -->
-                        <div class="form-group">
-                            <label for="dates">Preferred Travel Dates</label>
-                            <input type="text" id="dates" name="dates" placeholder="e.g., June 2024">
-                        </div>
-
-                        <!-- Form Field: Number of Travelers -->
-                        <div class="form-group">
-                            <label for="travelers">Number of Travelers</label>
-                            <input type="number" id="travelers" name="travelers" min="1" placeholder="2">
-                        </div>
-
-                        <!-- Form Field: Budget Range -->
-                        <div class="form-group">
-                            <label for="budget">Approximate Budget (Optional)</label>
-                            <select id="budget" name="budget">
-                                <option value="">Select budget range...</option>
-                                <option value="under-2000">Under $2,000</option>
-                                <option value="2000-5000">$2,000 - $5,000</option>
-                                <option value="5000-10000">$5,000 - $10,000</option>
-                                <option value="over-10000">Over $10,000</option>
-                            </select>
-                        </div>
-
-                        <!-- Form Field: Additional Details Textarea -->
-                        <div class="form-group">
-                            <label for="message">Additional Details</label>
-                            <textarea id="message" name="message" placeholder="Tell us about your travel preferences, special requests, or any questions you have..."></textarea>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <button type="submit" class="submit-btn">Submit Inquiry</button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Design annotation explaining contact layout -->
-            <div class="annotation">
-                <strong>Contact Layout:</strong> Two-column layout (stacks on mobile). Left side shows contact information with icons for quick scanning. Right side features comprehensive travel inquiry form with all necessary fields. Form includes service type, destination preferences, dates, budget, and space for detailed requests.
-            </div>
-
-            <!-- Additional CTA: Phone Call Option -->
-            <div class="content-section" style="text-align: center; background: var(--warm-sand); padding: 60px 40px;">
-                <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary-blue); margin-bottom: 15px;">Prefer to Talk First?</h2>
-                <p style="font-size: 1.1rem; color: var(--text-dark); margin-bottom: 25px;">Give us a call and let's discuss your travel plans over the phone</p>
-                <a href="tel:5551234567" style="display: inline-block; background: var(--accent-teal); color: white; padding: 15px 40px; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 1.1rem;">📞 Call Now: (555) 123-4567</a>
-            </div>
-
-            <!-- Footer -->
-            <div class="footer">
-                <div class="footer-links">
-                    <a href="#" class="footer-link">Home</a>
-                    <a href="#" class="footer-link">About</a>
-                    <a href="#" class="footer-link">Services</a>
-                    <a href="#" class="footer-link">Destinations</a>
-                    <a href="#" class="footer-link">Testimonials</a>
-                    <a href="#" class="footer-link">Contact</a>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2024 T's Travel. All rights reserved.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link">Facebook</a>
-                        <a href="#" class="social-link">Instagram</a>
-                        <a href="#" class="social-link">Twitter</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <script src="js/style..js"></script>
+    <!-- Main JavaScript file  -->
+    <script src="js/script.js"></script>
 </body>
 </html>
