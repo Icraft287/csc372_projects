@@ -1,0 +1,9 @@
+{
+  "name": "my-site",
+  "version": "1.0.0",
+  "description": "Static file server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
