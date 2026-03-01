@@ -1,0 +1,137 @@
+<!-- Hero section -->
+<header class="hero">
+    <div class="hero-content">
+        <h1>Explore Dream Destinations</h1>
+        <p>Discover where your next adventure will take you</p>
+    </div>
+</header>
+
+<main>
+    <!-- Featured destinations quick-nav rendered from server-side array -->
+    <section class="content-section" style="background: var(--warm-sand); text-align: center;">
+        <h2 class="section-title">Browse by Category</h2>
+        <div class="destination-grid">
+            {{#each featuredDestinations}}
+                <a href="#{{name}}" class="destination-card">{{emoji}} {{name}}</a>
+            {{/each}}
+        </div>
+    </section>
+
+    <!-- Caribbean section -->
+    <section class="content-section" id="Caribbean">
+        <article class="service-category">
+            <div class="service-header">
+                <div class="service-icon-large" aria-hidden="true">🌴</div>
+                <div><h2>Caribbean Paradise</h2></div>
+            </div>
+            <p class="service-description">Experience pristine beaches, crystal-clear waters, and vibrant island culture. The Caribbean offers the perfect blend of relaxation and adventure, with options ranging from all-inclusive resorts to intimate boutique properties.</p>
+            <div class="destination-image-container" data-destination="caribbean">
+                <img class="destination-image loading-placeholder" alt="Caribbean destination" />
+                <div class="image-credit"></div>
+            </div>
+            <div class="service-details">
+                <div class="service-feature"><h3>Jamaica</h3><p>Reggae rhythms, stunning beaches, and warm hospitality</p></div>
+                <div class="service-feature"><h3>Aruba</h3><p>Year-round sunshine and picture-perfect Caribbean shores</p></div>
+                <div class="service-feature"><h3>Bahamas</h3><p>Island hopping, water sports, and luxurious resorts</p></div>
+                <div class="service-feature"><h3>St. Lucia</h3><p>Dramatic landscapes, romantic settings, and tropical beauty</p></div>
+            </div>
+        </article>
+    </section>
+
+    <!-- Europe section -->
+    <section class="content-section" style="background: var(--warm-sand);" id="Europe">
+        <article class="service-category">
+            <div class="service-header">
+                <div class="service-icon-large" aria-hidden="true">🗼</div>
+                <div><h2>European Adventures</h2></div>
+            </div>
+            <p class="service-description">Immerse yourself in centuries of history, art, and culture. From the romantic streets of Paris to the ancient ruins of Rome, European destinations offer unforgettable experiences for every traveler.</p>
+            <div class="destination-image-container" data-destination="europe">
+                <img class="destination-image loading-placeholder" alt="European destination" />
+                <div class="image-credit"></div>
+            </div>
+            <div class="service-details">
+                <div class="service-feature"><h3>Italy</h3><p>Art, history, cuisine, and breathtaking landscapes</p></div>
+                <div class="service-feature"><h3>France</h3><p>Romance, culture, wine country, and iconic landmarks</p></div>
+                <div class="service-feature"><h3>Greece</h3><p>Ancient history, island hopping, and Mediterranean beauty</p></div>
+                <div class="service-feature"><h3>Spain</h3><p>Vibrant cities, stunning coastlines, and rich traditions</p></div>
+            </div>
+        </article>
+    </section>
+
+    <!-- Cruises section -->
+    <section class="content-section" id="Cruises">
+        <article class="service-category">
+            <div class="service-header">
+                <div class="service-icon-large" aria-hidden="true">🚢</div>
+                <div><h2>Cruise Destinations</h2></div>
+            </div>
+            <p class="service-description">See the world from the sea with carefully selected cruise itineraries. Wake up in a new destination each day while enjoying world-class dining, entertainment, and amenities onboard.</p>
+            <div class="destination-image-container" data-destination="cruise">
+                <img class="destination-image loading-placeholder" alt="Cruise destination" />
+                <div class="image-credit"></div>
+            </div>
+            <div class="service-details">
+                <div class="service-feature"><h3>Alaska</h3><p>Glaciers, wildlife, and untouched natural beauty</p></div>
+                <div class="service-feature"><h3>Mediterranean</h3><p>Explore multiple European countries in one voyage</p></div>
+                <div class="service-feature"><h3>Caribbean Islands</h3><p>Island hop through tropical paradise</p></div>
+                <div class="service-feature"><h3>River Cruises</h3><p>Intimate journeys through Europe and beyond</p></div>
+            </div>
+        </article>
+    </section>
+
+    <!-- Romantic Getaways section -->
+    <section class="content-section" style="background: var(--warm-sand);" id="Romantic Getaways">
+        <article class="service-category">
+            <div class="service-header">
+                <div class="service-icon-large" aria-hidden="true">💑</div>
+                <div><h2>Romantic Getaways</h2></div>
+            </div>
+            <p class="service-description">Create unforgettable memories with your special someone. Whether it's a honeymoon, anniversary, or just because, these destinations set the perfect romantic scene.</p>
+            <div class="destination-image-container" data-destination="romantic">
+                <img class="destination-image loading-placeholder" alt="Romantic getaway destination" />
+                <div class="image-credit"></div>
+            </div>
+            <div class="service-details">
+                <div class="service-feature"><h3>Maldives</h3><p>Overwater bungalows and pristine private beaches</p></div>
+                <div class="service-feature"><h3>Santorini</h3><p>Stunning sunsets and white-washed village charm</p></div>
+                <div class="service-feature"><h3>Bora Bora</h3><p>Turquoise lagoons and luxury overwater resorts</p></div>
+                <div class="service-feature"><h3>Tuscany</h3><p>Rolling hills, vineyard stays, and Italian romance</p></div>
+            </div>
+        </article>
+    </section>
+
+    <!-- More destinations grid -->
+    <section class="content-section">
+        <h2 class="section-title">More Destinations We Specialize In</h2>
+        <div class="card-grid">
+            <article class="card">
+                <div class="card-icon" aria-hidden="true">🏔️</div>
+                <h3>Adventure Travel</h3>
+                <p>Costa Rica, New Zealand, Iceland, and thrilling destinations</p>
+            </article>
+            <article class="card">
+                <div class="card-icon" aria-hidden="true">🌸</div>
+                <h3>Asia & Pacific</h3>
+                <p>Thailand, Bali, Japan, Australia, and exotic locations</p>
+            </article>
+            <article class="card">
+                <div class="card-icon" aria-hidden="true">🦁</div>
+                <h3>Safari Adventures</h3>
+                <p>Kenya, Tanzania, South Africa, and wildlife experiences</p>
+            </article>
+            <article class="card">
+                <div class="card-icon" aria-hidden="true">🏙️</div>
+                <h3>City Escapes</h3>
+                <p>New York, London, Dubai, and vibrant urban destinations</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Final call to action -->
+    <section class="content-section" style="background: var(--warm-sand); text-align: center;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px;">Not Sure Where to Go?</h2>
+        <p style="font-size: 1.2rem; color: var(--text-dark); margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto;">Let us help you find the perfect destination based on your interests, budget, and travel style.</p>
+        <a href="/contact" class="cta-button">Get Recommendations</a>
+    </section>
+</main>

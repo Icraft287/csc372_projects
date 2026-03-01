@@ -1,0 +1,147 @@
+<!-- Hero section -->
+<header class="hero">
+    <div class="hero-content">
+        <h1>Our Travel Services</h1>
+        <p>Expert planning for every type of journey</p>
+    </div>
+</header>
+
+<main>
+    <!-- Services list -->
+    <section class="content-section">
+        <!-- Cruise Vacations -->
+        <article class="service-category">
+            <div class="service-header">
+                <div class="service-icon-large" aria-hidden="true">🚢</div>
+                <div><h2>Cruise Vacations</h2></div>
+            </div>
+            <p class="service-description">Discover the world from the comfort of a luxury cruise ship. Whether you're dreaming of tropical Caribbean waters, Mediterranean coastlines, or Alaskan glaciers, we'll help you find the perfect cruise experience.</p>
+            <div class="service-details">
+                <div class="service-feature">
+                    <h3>Ocean Cruises</h3>
+                    <p>Caribbean, Mediterranean, Alaska, and worldwide destinations</p>
+                </div>
+                <div class="service-feature">
+                    <h3>River Cruises</h3>
+                    <p>Intimate journeys through Europe, Asia, and beyond</p>
+                </div>
+                <div class="service-feature">
+                    <h3>Specialty Cruises</h3>
+                    <p>Themed cruises, expedition cruises, and luxury experiences</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- All-Inclusive Vacations -->
+        <article class="service-category">
+            <div class="service-header">
+                <div class="service-icon-large" aria-hidden="true">🏖️</div>
+                <div><h2>All-Inclusive Vacations</h2></div>
+            </div>
+            <p class="service-description">Enjoy complete relaxation with all-inclusive resort packages where everything is taken care of. From meals and drinks to activities and entertainment, simply unwind and enjoy.</p>
+            <div class="service-details">
+                <div class="service-feature">
+                    <h3>Beach Resorts</h3>
+                    <p>Stunning coastal properties in the Caribbean, Mexico, and beyond</p>
+                </div>
+                <div class="service-feature">
+                    <h3>Family Resorts</h3>
+                    <p>Kid-friendly amenities, activities, and entertainment for all ages</p>
+                </div>
+                <div class="service-feature">
+                    <h3>Adults-Only Retreats</h3>
+                    <p>Peaceful, sophisticated escapes perfect for couples and adults</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Group Travel -->
+        <article class="service-category">
+            <div class="service-header">
+                <div class="service-icon-large" aria-hidden="true">👥</div>
+                <div><h2>Group Travel</h2></div>
+            </div>
+            <p class="service-description">Traveling with family, friends, or colleagues? We specialize in coordinating group trips that keep everyone together while meeting individual needs and preferences.</p>
+            <div class="service-details">
+                <div class="service-feature">
+                    <h3>Family Reunions</h3>
+                    <p>Multi-generational trips with activities for everyone</p>
+                </div>
+                <div class="service-feature">
+                    <h3>Corporate Travel</h3>
+                    <p>Team building trips and business group accommodations</p>
+                </div>
+                <div class="service-feature">
+                    <h3>Special Celebrations</h3>
+                    <p>Destination weddings, anniversaries, and milestone events</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Custom Trip Planning -->
+        <article class="service-category">
+            <div class="service-header">
+                <div class="service-icon-large" aria-hidden="true">✨</div>
+                <div><h2>Custom Trip Planning</h2></div>
+            </div>
+            <p class="service-description">Have a unique vision for your perfect vacation? We create completely customized itineraries tailored to your interests, budget, and travel style.</p>
+            <div class="service-details">
+                <div class="service-feature">
+                    <h3>Custom Itineraries</h3>
+                    <p>Personalized day-by-day plans designed around your preferences</p>
+                </div>
+                <div class="service-feature">
+                    <h3>Special Interests</h3>
+                    <p>Food tours, adventure travel, cultural experiences, and more</p>
+                </div>
+                <div class="service-feature">
+                    <h3>Multi-Destination</h3>
+                    <p>Complex trips combining multiple cities, countries, or continents</p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- What's Included — summary list rendered from server-side services array -->
+    <section class="content-section" style="background: var(--warm-sand); text-align: center;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px;">What's Included in Every Service</h2>
+        <div class="card-grid" style="margin-top: 40px;">
+            <article class="card">
+                <div class="card-icon" aria-hidden="true">📋</div>
+                <h3>Personalized Consultation</h3>
+                <p>One-on-one planning sessions to understand your needs</p>
+            </article>
+            <article class="card">
+                <div class="card-icon" aria-hidden="true">💰</div>
+                <h3>Budget Management</h3>
+                <p>Options and recommendations that fit your budget</p>
+            </article>
+            <article class="card">
+                <div class="card-icon" aria-hidden="true">📞</div>
+                <h3>Ongoing Support</h3>
+                <p>Available before, during, and after your trip</p>
+            </article>
+            <article class="card">
+                <div class="card-icon" aria-hidden="true">🎁</div>
+                <h3>Value Added</h3>
+                <p>Access to special amenities and exclusive offers</p>
+            </article>
+        </div>
+
+        <!-- Dynamic service name list from server -->
+        <div style="margin-top: 40px;">
+            <p style="font-size: 1.1rem; color: var(--text-dark);">Available services: 
+                {{#each services}}
+                    {{emoji}} {{name}}{{#unless @last}}, {{/unless}}
+                {{/each}}
+            </p>
+        </div>
+    </section>
+
+    <!-- Final call to action -->
+    <section class="content-section" style="text-align: center;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px;">Ready to Get Started?</h2>
+        <p style="font-size: 1.2rem; color: var(--text-dark); margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto;">Let's discuss which service is right for your next adventure. Contact us today for a free consultation.</p>
+        <a href="/contact" class="cta-button">Contact Us</a>
+    </section>
+</main>
