@@ -1,7 +1,13 @@
 {
-  "name": "my-site",
+  "name": "ts_travel",
   "version": "1.0.0",
-  "description": "Static file server",
+  "description": "T's Travel",
+  "keywords": [
+    "ts_travel"
+  ],
+  "license": "ISC",
+  "author": "Isaac Craft",
+  "type": "commonjs",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
