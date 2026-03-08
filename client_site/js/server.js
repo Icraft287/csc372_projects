@@ -147,7 +147,7 @@ function addPhotoCredit(photographerName, photographerUrl, photoUrl) {
 }
 
 /**
- * Load destination-specific images from Unsplash for destinations.html page
+ * Load destination-specific images from Unsplash for destinations.php page
  */
 async function loadDestinationImages() {
     const imageContainers = document.querySelectorAll('.destination-image-container');
