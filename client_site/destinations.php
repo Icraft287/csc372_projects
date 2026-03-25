@@ -2,43 +2,174 @@
 /*
     File: destinations.php
     Author: Isaac Crft
-    Date: March 8, 2026
+    Date: March 25, 2026
     Description: Destinations page for T's Travel – dynamically displays popular travel 
-                 destination categories using the Destination class. Each destination object 
-                 holds its name, icon, description, highlight spots, and display settings.
-                 Claude Ai was used to assit with making my comments look goog, undertstandble, ad in the right place.
+                 destination categories using the Destination class. Includes a trip inquiry 
+                 form with PHP server-side validation, cookies to track visitor name and 
+                 visit count, and sessions to track activity within the current browsing session.
+                 Uses the Post-Redirect-Get (PRG) pattern so cookies and session values are 
+                 correctly read after a successful form submission.
+                 FIXED: Visitor name now updates immediately in "Welcome back" after submission.
+                 Claude AI was used to assist with comments and structure.
 */
 
 // =====================================================================
+// SESSION START
+// =====================================================================
+session_start();
+
+// =====================================================================
+// COOKIE SETUP
+// =====================================================================
+
+// Read visit count from cookie. Default to 0 if this is a first visit.
+$visit_count = isset($_COOKIE['visit_count']) && is_numeric($_COOKIE['visit_count'])
+    ? (int)$_COOKIE['visit_count']
+    : 0;
+
+// Increment and write the updated count back to the browser.
+$visit_count++;
+setcookie('visit_count', $visit_count, time() + (30 * 24 * 60 * 60), '/');
+
+// Read last visit date.
+$last_visit = isset($_COOKIE['last_visit'])
+    ? $_COOKIE['last_visit']
+    : 'This is your first visit!';
+
+setcookie('last_visit', date('F j, Y'), time() + (30 * 24 * 60 * 60), '/');
+
+// Read the visitor's saved name from the cookie (for returning visitors)
+$cookie_name = isset($_COOKIE['visitor_name']) ? $_COOKIE['visitor_name'] : '';
+
+// =====================================================================
+// SESSION SETUP
+// =====================================================================
+
+// Count how many inquiries the visitor has submitted this session.
+if (!isset($_SESSION['inquiry_count'])) {
+    $_SESSION['inquiry_count'] = 0;
+}
+
+// Remember the last trip type the visitor inquired about this session.
+if (!isset($_SESSION['last_trip_type'])) {
+    $_SESSION['last_trip_type'] = '';
+}
+
+// NEW: Temporary session variable to show the name immediately after successful submission + redirect
+if (!isset($_SESSION['just_submitted_name'])) {
+    $_SESSION['just_submitted_name'] = '';
+}
+
+// =====================================================================
+// SUCCESS MESSAGE (Post-Redirect-Get pattern)
+// =====================================================================
+$form_message = '';
+$all_errors   = '';
+
+if (isset($_SESSION['success_message'])) {
+    $form_message = $_SESSION['success_message'];
+    unset($_SESSION['success_message']);
+}
+
+// =====================================================================
+// INCLUDE VALIDATION FUNCTIONS
+// =====================================================================
+require_once 'validate.php';
+
+$allowed_trip_types = ['adventure', 'relaxation', 'cultural', 'family'];
+
+// Default values shown in inputs
+$values = [
+    'full_name'  => '',
+    'travelers'  => '',
+    'trip_type'  => '',
+];
+
+// Error messages per field
+$errors = [
+    'full_name'  => '',
+    'travelers'  => '',
+    'trip_type'  => '',
+];
+
+// =====================================================================
+// FORM PROCESSING (POST requests only)
+// =====================================================================
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // Collect submitted values
+    $values['full_name'] = $_POST['full_name'];
+    $values['travelers'] = $_POST['travelers'];
+    $values['trip_type'] = $_POST['trip_type'] ?? '';
+
+    // Validate each field
+    if (!is_valid_text($values['full_name'], 2, 50)) {
+        $errors['full_name'] = 'Full name must be between 2 and 50 characters.';
+    }
+
+    if (!is_valid_number($values['travelers'], 1, 20)) {
+        $errors['travelers'] = 'Number of travelers must be a whole number between 1 and 20.';
+    }
+
+    if (!is_valid_option($values['trip_type'], $allowed_trip_types)) {
+        $errors['trip_type'] = 'Please select a valid trip type.';
+    }
+
+    $all_errors = implode('', $errors);
+
+    if ($all_errors === '') {
+        // ----------------------------------------------------------------
+        // ALL FIELDS VALID — Success path with PRG
+        // ----------------------------------------------------------------
+
+        // Save visitor name to cookie (will be available on the next request)
+        setcookie(
+            'visitor_name',
+            $values['full_name'],
+            [
+                'expires'  => time() + (30 * 24 * 60 * 60),
+                'path'     => '/',
+                'secure'   => false,        // Change to true if site uses HTTPS
+                'httponly' => true,
+                'samesite' => 'Lax'
+            ]
+        );
+
+        // Store name in session so we can display it immediately after redirect
+        $_SESSION['just_submitted_name'] = $values['full_name'];
+
+        // Update session data
+        $_SESSION['inquiry_count']++;
+        $_SESSION['last_trip_type'] = $values['trip_type'];
+
+        // Success message stored in session (survives redirect)
+        $_SESSION['success_message'] = 'Thank you, ' . htmlspecialchars($values['full_name'])
+            . '! Your inquiry for ' . htmlspecialchars($values['travelers'])
+            . ' traveler(s) has been received. We will be in touch soon!';
+
+        // Redirect back to this page (PRG pattern)
+        header('Location: destinations.php#inquiry-form');
+        exit;
+
+    } else {
+        // Validation failed
+        $form_message = 'Please correct the errors below and try again.';
+    }
+}
+
+// =====================================================================
 // CLASS DEFINITION
-// Destination models a travel destination category shown on this page.
-// Each instance represents one section (e.g. Caribbean, Europe, etc.)
 // =====================================================================
 class Destination {
 
-    // $name: The display title of the destination category (e.g. "Caribbean Paradise")
     public string $name;
-
-    // $icon: Emoji icon used in the section header
     public string $icon;
-
-    // $description: Paragraph text describing the destination category
     public string $description;
-
-    // $anchor: The HTML id anchor for this section (e.g. "caribbean")
     public string $anchor;
-
-    // $altText: Alt text for the destination image
     public string $altText;
-
-    // $bgColor: Optional inline background color for alternating section style
     public string $bgColor;
-
-    // $spots: Array of sub-destinations, each with a name and short description
-    // Each element is an associative array: ['name' => ..., 'desc' => ...]
     private array $spots;
 
-    // Constructor: accepts all properties and sets them via $this
     public function __construct(
         string $name,
         string $icon,
@@ -57,29 +188,14 @@ class Destination {
         $this->bgColor     = $bgColor;
     }
 
-    // ----------------------------------------------------------------
-    // METHOD 1: getHeaderTitle()
-    // Returns a formatted string combining the icon and destination name.
-    // Used in the section <h2> heading.
-    // ----------------------------------------------------------------
     public function getHeaderTitle(): string {
         return $this->icon . " " . $this->name;
     }
 
-    // ----------------------------------------------------------------
-    // METHOD 2: getSpotsCount()
-    // Returns the number of highlight spots for this destination.
-    // Used to dynamically show "X featured destinations" in the section.
-    // ----------------------------------------------------------------
     public function getSpotsCount(): int {
         return count($this->spots);
     }
 
-    // ----------------------------------------------------------------
-    // METHOD 3: renderSpots()
-    // Loops through the $spots array and returns the complete HTML 
-    // for the service-details grid of feature boxes.
-    // ----------------------------------------------------------------
     public function renderSpots(): string {
         $html = '<div class="service-details">';
         foreach ($this->spots as $spot) {
@@ -94,13 +210,10 @@ class Destination {
     }
 }
 
-
 // =====================================================================
 // OBJECT CREATION
-// Creating instances of Destination — each one is a unique category.
 // =====================================================================
 
-// Object 1: Caribbean
 $caribbean = new Destination(
     name:        "Caribbean Paradise",
     icon:        "🌴",
@@ -115,7 +228,6 @@ $caribbean = new Destination(
     ]
 );
 
-// Object 2: Europe
 $europe = new Destination(
     name:        "European Adventures",
     icon:        "🗼",
@@ -131,7 +243,6 @@ $europe = new Destination(
     ]
 );
 
-// Object 3: Cruises
 $cruises = new Destination(
     name:        "Cruise Destinations",
     icon:        "🚢",
@@ -139,14 +250,13 @@ $cruises = new Destination(
     anchor:      "cruises",
     altText:     "Cruise ship at sea",
     spots: [
-        ["name" => "Alaska",           "desc" => "Glaciers, wildlife, and untouched natural beauty"],
-        ["name" => "Mediterranean",    "desc" => "Explore multiple European countries in one voyage"],
-        ["name" => "Caribbean Islands","desc" => "Island hop through tropical paradise"],
-        ["name" => "River Cruises",    "desc" => "Intimate journeys through Europe and beyond"],
+        ["name" => "Alaska",            "desc" => "Glaciers, wildlife, and untouched natural beauty"],
+        ["name" => "Mediterranean",     "desc" => "Explore multiple European countries in one voyage"],
+        ["name" => "Caribbean Islands", "desc" => "Island hop through tropical paradise"],
+        ["name" => "River Cruises",     "desc" => "Intimate journeys through Europe and beyond"],
     ]
 );
 
-// Object 4: Romantic Getaways
 $romantic = new Destination(
     name:        "Romantic Getaways",
     icon:        "💑",
@@ -155,35 +265,23 @@ $romantic = new Destination(
     altText:     "Romantic overwater bungalow getaway",
     bgColor:     "var(--warm-sand)",
     spots: [
-        ["name" => "Maldives",   "desc" => "Overwater bungalows and pristine private beaches"],
-        ["name" => "Santorini",  "desc" => "Stunning sunsets and white-washed village charm"],
-        ["name" => "Bora Bora",  "desc" => "Turquoise lagoons and luxury overwater resorts"],
-        ["name" => "Tuscany",    "desc" => "Rolling hills, vineyard stays, and Italian romance"],
+        ["name" => "Maldives",  "desc" => "Overwater bungalows and pristine private beaches"],
+        ["name" => "Santorini", "desc" => "Stunning sunsets and white-washed village charm"],
+        ["name" => "Bora Bora", "desc" => "Turquoise lagoons and luxury overwater resorts"],
+        ["name" => "Tuscany",   "desc" => "Rolling hills, vineyard stays, and Italian romance"],
     ]
 );
 
-// Collect all destination objects into an array for easy looping
 $destinations = [$caribbean, $europe, $cruises, $romantic];
 ?>
 <!DOCTYPE html>
-<!-- 
-    File: destinations.php
-    Author: Isaac Crft
-    Date: March 8, 2026
-    Description: Destinations page for T's Travel – highlights popular travel spots 
-                 and categories using PHP objects built from the Destination class.
--->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore popular travel destinations with T's Travel - Caribbean, Europe, Cruises, and Romantic Getaways">
     <title>Destinations - T's Travel</title>
-    
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    
-    <!-- Main stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -208,7 +306,7 @@ $destinations = [$caribbean, $europe, $cruises, $romantic];
         </div>
     </nav>
 
-    <!-- Hero section -->
+    <!-- Hero -->
     <header class="hero">
         <div class="hero-content">
             <h1>Explore Dream Destinations</h1>
@@ -218,14 +316,66 @@ $destinations = [$caribbean, $europe, $cruises, $romantic];
 
     <main>
 
+        <!-- ============================================================
+             VISITOR INFO PANEL - UPDATED with immediate name display
+        ============================================================ -->
+        <section class="content-section visitor-info-section">
+            <div class="visitor-info-panel">
+
+                <!-- COOKIE DATA -->
+                <div class="visitor-info-group">
+                    <h3>🍪 Your Visit Info <span class="info-label">(stored in cookies)</span></h3>
+                    <ul>
+                        <li>
+                            <strong>Welcome back:</strong>
+                            <?php 
+                            if (!empty($cookie_name)) {
+                                echo htmlspecialchars($cookie_name);
+                            } elseif (!empty($_SESSION['just_submitted_name'])) {
+                                echo htmlspecialchars($_SESSION['just_submitted_name']);
+                                // Clear the temporary session variable after displaying it once
+                                unset($_SESSION['just_submitted_name']);
+                            } else {
+                                echo 'Guest';
+                            }
+                            ?>
+                        </li>
+                        <li>
+                            <strong>Page visits:</strong> <?= $visit_count ?>
+                        </li>
+                        <li>
+                            <strong>Last visit:</strong> <?= htmlspecialchars($last_visit) ?>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- SESSION DATA -->
+                <div class="visitor-info-group">
+                    <h3>🖥️ This Session <span class="info-label">(stored on server)</span></h3>
+                    <ul>
+                        <li>
+                            <strong>Inquiries this session:</strong> <?= (int)$_SESSION['inquiry_count'] ?>
+                        </li>
+                        <li>
+                            <strong>Last trip type inquired:</strong>
+                            <?php if (!empty($_SESSION['last_trip_type'])): ?>
+                                <?= htmlspecialchars(ucfirst($_SESSION['last_trip_type'])) ?>
+                            <?php else: ?>
+                                None yet
+                            <?php endif; ?>
+                        </li>
+                    </ul>
+                    <a href="clear_session.php" class="clear-session-btn">Clear Session</a>
+                </div>
+
+            </div>
+        </section>
+
         <?php
         // ---------------------------------------------------------------
-        // LOOP: Render each Destination object as a full page section.
-        // Accesses the public $bgColor property directly.
-        // Calls getHeaderTitle(), getSpotsCount(), and renderSpots().
+        // LOOP: Render each Destination object
         // ---------------------------------------------------------------
         foreach ($destinations as $dest):
-            // Access the public $bgColor property to set alternating backgrounds
             $sectionStyle = !empty($dest->bgColor) ? 'style="background: ' . $dest->bgColor . ';"' : '';
         ?>
 
@@ -235,9 +385,7 @@ $destinations = [$caribbean, $europe, $cruises, $romantic];
                 <div class="service-header">
                     <div class="service-icon-large" aria-hidden="true"><?php echo $dest->icon; ?></div>
                     <div>
-                        <!-- Calls getHeaderTitle() to display icon + name together -->
                         <h2><?php echo htmlspecialchars($dest->getHeaderTitle()); ?></h2>
-                        <!-- Calls getSpotsCount() to show how many spots are listed -->
                         <p style="color: var(--accent-teal); font-size: 0.95rem; margin-top: 5px;">
                             <?php echo $dest->getSpotsCount(); ?> featured destinations
                         </p>
@@ -246,13 +394,11 @@ $destinations = [$caribbean, $europe, $cruises, $romantic];
 
                 <p class="service-description"><?php echo htmlspecialchars($dest->description); ?></p>
 
-                <!-- Image container (populated by script.js as before) -->
                 <div class="destination-image-container" data-destination="<?php echo htmlspecialchars($dest->anchor); ?>">
                     <img class="destination-image loading-placeholder" alt="<?php echo htmlspecialchars($dest->altText); ?>" />
                     <div class="image-credit"></div>
                 </div>
 
-                <!-- Calls renderSpots() to output the full spots grid HTML -->
                 <?php echo $dest->renderSpots(); ?>
 
             </article>
@@ -260,7 +406,7 @@ $destinations = [$caribbean, $europe, $cruises, $romantic];
 
         <?php endforeach; ?>
 
-        <!-- More destinations grid (static cards — not part of the class) -->
+        <!-- More destinations grid (static) -->
         <section class="content-section">
             <h2 class="section-title">More Destinations We Specialize In</h2>
             <div class="card-grid">
@@ -287,7 +433,98 @@ $destinations = [$caribbean, $europe, $cruises, $romantic];
             </div>
         </section>
 
-        <!-- Final call to action -->
+        <!-- TRIP INQUIRY FORM -->
+        <section class="content-section" id="inquiry-form">
+            <article class="service-category">
+
+                <div class="service-header">
+                    <div class="service-icon-large" aria-hidden="true">✈️</div>
+                    <div>
+                        <h2>Plan Your Trip</h2>
+                        <p style="color: var(--accent-teal); font-size: 0.95rem; margin-top: 5px;">
+                            Tell us about your dream vacation
+                        </p>
+                    </div>
+                </div>
+
+                <p class="service-description">
+                    Ready to start planning? Fill out the form below and one of our travel specialists
+                    will put together a personalized itinerary just for you.
+                </p>
+
+                <?php if ($form_message !== ''): ?>
+                    <p class="form-message <?= ($all_errors === '') ? 'success' : 'error' ?>">
+                        <?= $form_message ?>
+                    </p>
+                <?php endif; ?>
+
+                <form action="destinations.php" method="POST" novalidate>
+
+                    <div class="form-group">
+                        <label for="full_name">Full Name:</label>
+                        <input
+                            type="text"
+                            id="full_name"
+                            name="full_name"
+                            value="<?= htmlspecialchars($values['full_name']) ?>"
+                            placeholder="e.g. Jane Smith">
+                        <?php if ($errors['full_name'] !== ''): ?>
+                            <span class="error-msg"><?= $errors['full_name'] ?></span>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="travelers">Number of Travelers:</label>
+                        <input
+                            type="number"
+                            id="travelers"
+                            name="travelers"
+                            value="<?= htmlspecialchars($values['travelers']) ?>"
+                            placeholder="e.g. 2">
+                        <?php if ($errors['travelers'] !== ''): ?>
+                            <span class="error-msg"><?= $errors['travelers'] ?></span>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="form-group">
+                        <fieldset class="radio-fieldset">
+                            <legend>Trip Type:</legend>
+
+                            <label class="radio-label">
+                                <input type="radio" name="trip_type" value="adventure"
+                                    <?= ($values['trip_type'] === 'adventure') ? 'checked' : '' ?>>
+                                🏔️ Adventure
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="trip_type" value="relaxation"
+                                    <?= ($values['trip_type'] === 'relaxation') ? 'checked' : '' ?>>
+                                🌴 Relaxation
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="trip_type" value="cultural"
+                                    <?= ($values['trip_type'] === 'cultural') ? 'checked' : '' ?>>
+                                🏛️ Cultural
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="trip_type" value="family"
+                                    <?= ($values['trip_type'] === 'family') ? 'checked' : '' ?>>
+                                👨‍👩‍👧‍👦 Family
+                            </label>
+
+                        </fieldset>
+                        <?php if ($errors['trip_type'] !== ''): ?>
+                            <span class="error-msg"><?= $errors['trip_type'] ?></span>
+                        <?php endif; ?>
+                    </div>
+
+                    <button type="submit" class="cta-button">Submit Inquiry</button>
+
+                </form>
+
+            </article>
+        </section>
+
+        <!-- Final CTA -->
         <section class="content-section" style="background: var(--warm-sand); text-align: center;">
             <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px;">Not Sure Where to Go?</h2>
             <p style="font-size: 1.2rem; color: var(--text-dark); margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto;">Let us help you find the perfect destination based on your interests, budget, and travel style. We'll provide personalized recommendations and handle all the planning details.</p>
@@ -315,7 +552,6 @@ $destinations = [$caribbean, $europe, $cruises, $romantic];
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script src="js/server.js"></script>
 </body>
 </html>

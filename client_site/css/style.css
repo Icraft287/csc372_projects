@@ -7,6 +7,7 @@
     AI help: Used AI to help organize color variables, create consistent card/hover effects, 
              structure the mobile menu behavior, and fix form + grid responsiveness.
     Updated: Added styles for Unsplash photo credit attribution
+    Updated: Added styles for PHP form validation messages and radio button fieldset (destinations.php)
 */
 
 /* ===== Reset and Base Styles ===== */
@@ -208,7 +209,7 @@ body {
     text-decoration: underline;
 }
 
-/* ===== Destination Images (destinations.php ===== */
+/* ===== Destination Images (destinations.php) ===== */
 .destination-image-container {
     margin: 30px 0;
     border-radius: 15px;
@@ -457,6 +458,7 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
+/* ===== Form Groups (shared by contact page and destinations.php form) ===== */
 .form-group {
     margin-bottom: 25px;
 }
@@ -526,6 +528,86 @@ body {
     background: var(--primary-blue);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(42, 157, 143, 0.3);
+}
+
+/* ===== PHP Form Validation — destinations.php ===== */
+
+/* 
+    .form-message: Banner shown at the top of the form after submission.
+    .success: Green styling when all fields pass validation.
+    .error: Red styling when one or more fields fail validation.
+*/
+.form-message {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.form-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 2px solid #c3e6cb;
+}
+
+.form-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 2px solid #f5c6cb;
+}
+
+/*
+    .error-msg: Small red message shown directly below an invalid input.
+    Uses display: block so it sits on its own line under the field.
+*/
+.error-msg {
+    display: block;
+    color: #cc0000;
+    font-size: 0.875rem;
+    margin-top: 6px;
+}
+
+/*
+    .radio-fieldset: Removes the default browser border/padding from <fieldset>
+    so it blends into the form layout cleanly.
+*/
+.radio-fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+/*
+    .radio-fieldset legend: Styles the "Trip Type:" label to match
+    the other bold form labels above text and number inputs.
+*/
+.radio-fieldset legend {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+/*
+    .radio-label: Lays out each radio button and its text side by side,
+    with consistent spacing between options.
+*/
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+    width: auto;
+    padding: 0;
+    border: none;
+    accent-color: var(--accent-teal);
+    cursor: pointer;
 }
 
 /* ===== About Page Specific ===== */
@@ -598,6 +680,108 @@ body {
 
 .social-link:hover {
     color: var(--accent-teal);
+}
+
+/* ===== Visitor Info Panel (cookies & sessions — destinations.php) ===== */
+
+/*
+    .visitor-info-section: Gives the panel a subtle teal-tinted background
+    to visually separate it from the rest of the page content.
+*/
+.visitor-info-section {
+    background: var(--deep-ocean);
+    padding: 30px 40px;
+}
+
+/*
+    .visitor-info-panel: Two-column layout — left side shows cookie data,
+    right side shows session data.
+*/
+.visitor-info-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/*
+    .visitor-info-group: Individual box for each data category.
+    White background with rounded corners to match the site's card style.
+*/
+.visitor-info-group {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 25px;
+    color: white;
+}
+
+.visitor-info-group h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.visitor-info-group ul {
+    list-style: none;
+    padding: 0;
+}
+
+.visitor-info-group ul li {
+    padding: 6px 0;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.visitor-info-group ul li:last-child {
+    border-bottom: none;
+}
+
+/*
+    .info-label: Small muted tag explaining where the data is stored.
+    Shown in the h3 next to the section title.
+*/
+.info-label {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--accent-teal);
+    font-family: 'Lato', sans-serif;
+}
+
+/*
+    .clear-session-btn: Button that links to clear_session.php.
+    Styled as a subtle outlined button so it doesn't compete with the main CTA.
+*/
+.clear-session-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    color: white;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.clear-session-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--accent-teal);
+    color: var(--accent-teal);
+}
+
+/* Stack visitor panel to one column on mobile */
+@media (max-width: 768px) {
+    .visitor-info-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .visitor-info-section {
+        padding: 25px 20px;
+    }
 }
 
 /* ===== Responsive Design (Mobile & Tablet) ===== */
@@ -694,5 +878,15 @@ body {
         padding: 3px 8px;
         bottom: 5px;
         right: 5px;
+    }
+
+    /* Form validation elements stack cleanly on small screens */
+    .radio-label {
+        font-size: 0.95rem;
+    }
+
+    .form-message {
+        font-size: 0.95rem;
+        padding: 12px 15px;
     }
 }
