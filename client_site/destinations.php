@@ -76,6 +76,12 @@ if (isset($_SESSION['success_message'])) {
 // =====================================================================
 require_once 'validate.php';
 
+// =====================================================================
+// INCLUDE DATABASE CONNECTION
+// db.php creates the $pdo object used to query the trips table below.
+// =====================================================================
+require_once 'db.php';
+
 $allowed_trip_types = ['adventure', 'relaxation', 'cultural', 'family'];
 
 // Default values shown in inputs
@@ -122,6 +128,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // ALL FIELDS VALID — Success path with PRG
         // ----------------------------------------------------------------
 
+            // ==========================================
+        // GET trip_id FROM trips TABLE
+        // ==========================================
+        $sql = "SELECT trip_id FROM trips WHERE trip_type = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$values['trip_type']]);
+        $trip = $stmt->fetch();
+
+        if ($trip) {
+            $trip_id = (int)$trip['trip_id'];
+
+            // ==========================================
+            // INSERT INTO inquiries TABLE
+            // ==========================================
+            $sql = "INSERT INTO inquiries (trip_id, trip_type, full_name, travelers, submitted_at)
+                    VALUES (?, ?, ?, ?, NOW())";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                $trip_id,
+                $values['trip_type'],
+                $values['full_name'],
+                (int)$values['travelers']
+            ]);
+        }
+
         // Save visitor name to cookie (will be available on the next request)
         setcookie(
             'visitor_name',
@@ -156,6 +188,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $form_message = 'Please correct the errors below and try again.';
     }
 }
+
+// =====================================================================
+// DATABASE QUERY: Retrieve all trip packages from the trips table.
+//
+// Steps:
+//  1. Write the SQL SELECT query as a string.
+//  2. Execute it using $pdo->query() since there is no user input.
+//  3. Fetch all rows at once into $trips using fetchAll().
+//  4. If $trips is empty, a "not found" message is shown in the HTML.
+//  5. All output is escaped with htmlspecialchars() before display.
+// =====================================================================
+
+// Step 1: SQL — retrieve all columns, ordered by price ascending
+$sql = "SELECT trip_id, trip_name, trip_type, description, price_per_person, max_travelers
+        FROM trips
+        ORDER BY price_per_person ASC";
+
+// Step 2: Execute — $pdo->query() runs a no-parameter query, returns PDOStatement
+$stmt = $pdo->query($sql);
+
+// Step 3: Fetch all rows into a PHP array of associative arrays
+$trips = $stmt->fetchAll();
 
 // =====================================================================
 // CLASS DEFINITION
