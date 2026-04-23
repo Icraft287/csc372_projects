@@ -93,6 +93,14 @@ $icons = [
         echo $trip ? htmlspecialchars($trip['trip_name']) . ' - T\'s Travel' : 'Trip Not Found - T\'s Travel';
         ?>
     </title>
+    <!-- Preconnect to Google Fonts servers to reduce DNS lookup time -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!--
+        display=swap tells the browser to render text in a fallback font immediately
+        while Playfair Display and Lato load in the background.
+        This prevents the page from being blank while waiting for fonts.
+    -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>

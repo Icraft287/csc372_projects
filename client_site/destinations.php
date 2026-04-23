@@ -128,32 +128,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // ALL FIELDS VALID — Success path with PRG
         // ----------------------------------------------------------------
 
-            // ==========================================
-        // GET trip_id FROM trips TABLE
-        // ==========================================
-        $sql = "SELECT trip_id FROM trips WHERE trip_type = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$values['trip_type']]);
-        $trip = $stmt->fetch();
-
-        if ($trip) {
-            $trip_id = (int)$trip['trip_id'];
-
-            // ==========================================
-            // INSERT INTO inquiries TABLE
-            // ==========================================
-            $sql = "INSERT INTO inquiries (trip_id, trip_type, full_name, travelers, submitted_at)
-                    VALUES (?, ?, ?, ?, NOW())";
-
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([
-                $trip_id,
-                $values['trip_type'],
-                $values['full_name'],
-                (int)$values['travelers']
-            ]);
-        }
-
         // Save visitor name to cookie (will be available on the next request)
         setcookie(
             'visitor_name',
@@ -335,6 +309,14 @@ $destinations = [$caribbean, $europe, $cruises, $romantic];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore popular travel destinations with T's Travel - Caribbean, Europe, Cruises, and Romantic Getaways">
     <title>Destinations - T's Travel</title>
+    <!-- Preconnect to Google Fonts servers to reduce DNS lookup time -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!--
+        display=swap tells the browser to render text in a fallback font immediately
+        while Playfair Display and Lato load in the background.
+        This prevents the page from being blank while waiting for fonts.
+    -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>

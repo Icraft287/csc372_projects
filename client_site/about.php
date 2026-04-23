@@ -1,0 +1,154 @@
+<?php
+/*
+    File: about.php
+    Author: Isaac Crft
+    Date: February 14, 2026
+    Description: About Us page for T's Travel - story, values, mission, and why choose us.
+                 Converted from about.html to PHP so the entire site is PHP.
+    AI help: Got help organizing content flow, styling the values cards consistently, 
+             and fixing list spacing/margins when things looked off.
+             Updated: Converted to PHP, added Google Fonts performance fix.
+*/
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about T's Travel - Your trusted travel planning partner with years of experience in creating unforgettable vacation experiences">
+    <title>About Us - T's Travel</title>
+    
+    <!-- Google Fonts -->
+    <!-- Preconnect to Google Fonts servers to reduce DNS lookup time -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!--
+        display=swap tells the browser to render text in a fallback font immediately
+        while Playfair Display and Lato load in the background.
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.php" class="logo">
+            <div class="logo-icon" aria-hidden="true">✈️</div>
+            <span>T's Travel</span>
+        </a>
+        <div class="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="index.php" class="nav-link">Home</a>
+            <a href="about.php" class="nav-link active">About</a>
+            <a href="services.php" class="nav-link">Services</a>
+            <a href="destinations.php" class="nav-link">Destinations</a>
+            <a href="contact.php" class="contact-btn">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- Hero section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>About T's Travel</h1>
+            <p>Passionate about creating unforgettable travel experiences</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- Main about content -->
+        <section class="content-section">
+            <article class="about-content">
+                <!-- Our Story -->
+                <h2>Our Story</h2>
+                <p>At T's Travel, we believe that travel is more than just visiting new places—it's about creating memories that last a lifetime. As a dedicated travel professional, I'm passionate about helping individuals, couples, families, and retirees plan vacations that exceed their expectations.</p>
+                
+                <p>With years of experience in the travel industry and a personal love for exploring the world, I understand what makes a trip truly special. From the initial consultation to the moment you return home, I'm committed to providing personalized service and expert guidance every step of the way.</p>
+
+                <!-- Why Choose Us -->
+                <h2>Why Choose Us</h2>
+                <p>Planning a vacation can be overwhelming. There are countless options, endless research, and the stress of making sure everything is perfect. That's where I come in. I take the hassle out of travel planning by:</p>
+                
+                <ul style="line-height: 2; margin: 20px 0 20px 40px;">
+                    <li>Listening to your needs and preferences</li>
+                    <li>Providing personalized recommendations based on your budget and interests</li>
+                    <li>Handling all the details so you can relax and enjoy</li>
+                    <li>Offering insider knowledge and expert advice</li>
+                    <li>Being available to support you before, during, and after your trip</li>
+                </ul>
+
+                <p>Whether you're dreaming of a Caribbean cruise, a European adventure, an all-inclusive resort getaway, or a custom-designed journey, I'm here to make it happen.</p>
+
+                <!-- Our Mission -->
+                <h2>Our Mission</h2>
+                <p>My mission is simple: to help clients confidently plan memorable travel experiences without the hassle of researching and booking everything on their own. I believe that working with a dedicated travel professional means less stress, better value, and more enjoyment from start to finish.</p>
+            </article>
+        </section>
+
+        <!-- Values section -->
+        <section class="content-section" style="background: var(--warm-sand);">
+            <h2 class="section-title">Our Values</h2>
+            <div class="values-grid">
+                <article class="value-card">
+                    <div class="value-icon" aria-hidden="true">🤝</div>
+                    <h3>Personalized Service</h3>
+                    <p>Every client receives individual attention and customized recommendations</p>
+                </article>
+                
+                <article class="value-card">
+                    <div class="value-icon" aria-hidden="true">⭐</div>
+                    <h3>Expert Knowledge</h3>
+                    <p>Years of experience and firsthand travel insights guide our planning</p>
+                </article>
+                
+                <article class="value-card">
+                    <div class="value-icon" aria-hidden="true">💎</div>
+                    <h3>Quality Focus</h3>
+                    <p>We partner with trusted suppliers to ensure exceptional experiences</p>
+                </article>
+                
+                <article class="value-card">
+                    <div class="value-icon" aria-hidden="true">🛡️</div>
+                    <h3>Peace of Mind</h3>
+                    <p>Professional support from planning through your return home</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Final call to action -->
+        <section class="content-section" style="text-align: center;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px;">Let's Plan Your Next Adventure</h2>
+            <p style="font-size: 1.2rem; color: var(--text-dark); margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto;">Ready to turn your travel dreams into reality? Contact us today to get started.</p>
+            <a href="contact.php" class="cta-button">Contact Us</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <nav class="footer-links" aria-label="Footer navigation">
+            <a href="index.php" class="footer-link">Home</a>
+            <a href="about.php" class="footer-link">About</a>
+            <a href="services.php" class="footer-link">Services</a>
+            <a href="destinations.php" class="footer-link">Destinations</a>
+            <a href="contact.php" class="footer-link">Contact</a>
+        </nav>
+        <div class="footer-bottom">
+            <p>&copy; 2026 T's Travel. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" class="social-link" aria-label="Visit our Facebook page">Facebook</a>
+                <a href="#" class="social-link" aria-label="Visit our Instagram page">Instagram</a>
+                <a href="#" class="social-link" aria-label="Visit our Twitter page">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/server.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 <?php
 /*
-    File: db.php
+    File: db.php 
     Author: Isaac Crft
     Date: March 25, 2026
     Description: Creates a PDO connection to the isaaccra_clientsite
