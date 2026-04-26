@@ -24,10 +24,7 @@ body {
     color: #e0e0e0;
 }
 
-
-
 /* ===== Color Variables ===== */
-/* Dark mode is the default; light mode is applied only when the OS/browser prefers it */
 :root {
     --primary-blue:  #3a6fa8;
     --accent-teal:   #3bbfb0;
@@ -38,8 +35,6 @@ body {
     --light-gray:    #333333;
     --text-dark:     #e0e0e0;
 }
-
-
 
 /* ===== Layout Containers ===== */
 .container {
@@ -1271,12 +1266,9 @@ body {
 }
 
 /* -------------------------------------------------------------------
-   CHANGE #10 — DARK MODE IS DEFAULT
-   Dark styles are applied unconditionally. Light mode overrides are
-   provided via @media (prefers-color-scheme: light).
+   CHANGE #10 — DARK MODE STYLES
 ------------------------------------------------------------------- */
 
-/* Dark mode element defaults (always applied) */
 .card, .service-category, .about-content, .inquiry-form, .admin-section {
     background: #252525;
     border-color: #333;
@@ -1301,10 +1293,7 @@ body {
 .form-message.success { background: #1a3a22; color: #7ec892; border-color: #2d6040; }
 .form-message.error   { background: #3a1a1a; color: #e08080; border-color: #6a2a2a; }
 
-/* Keep hero readable in dark mode */
 .hero { background: linear-gradient(135deg, #1a7060 0%, #0f1e30 100%); }
-
-
 
 
 /* Existing responsive additions for new elements */
