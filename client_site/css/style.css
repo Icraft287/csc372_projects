@@ -1270,7 +1270,7 @@ body {
    Overrides CSS variables when the OS/browser is in dark mode.
    Uses the existing variable system so all colours flip automatically.
 ------------------------------------------------------------------- */
-@media (prefers-color-scheme: dark) {
+
     :root {
         --primary-blue:  #3a6fa8;
         --accent-teal:   #3bbfb0;
@@ -1310,7 +1310,7 @@ body {
 
     /* Keep hero readable */
     .hero { background: linear-gradient(135deg, #1a7060 0%, #0f1e30 100%); }
-}
+
 
 /* Existing responsive additions for new elements */
 @media (max-width: 768px) {
