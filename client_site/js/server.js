@@ -26,6 +26,37 @@
 const UNSPLASH_ACCESS_KEY = 'BG94OREPs4vtLCNUMtKGsVfGUVsJIa_3hpKtMMPO9hs';
 // Get your free API key at: https://unsplash.com/developers
 
+// ===== UNSPLASH CACHE HELPERS =====
+// Caches image URLs in localStorage for 1 hour so repeat visits
+// don't burn through the 50 requests/hour free tier limit.
+const CACHE_TTL = 60 * 60 * 1000; // 1 hour in milliseconds
+
+function getCached(key) {
+    try {
+        const raw = localStorage.getItem('unsplash_' + key);
+        if (!raw) return null;
+        const entry = JSON.parse(raw);
+        if (Date.now() - entry.timestamp > CACHE_TTL) {
+            localStorage.removeItem('unsplash_' + key);
+            return null;
+        }
+        return entry.data;
+    } catch (e) {
+        return null;
+    }
+}
+
+function setCache(key, data) {
+    try {
+        localStorage.setItem('unsplash_' + key, JSON.stringify({
+            timestamp: Date.now(),
+            data: data
+        }));
+    } catch (e) {
+        // localStorage full or unavailable — fail silently
+    }
+}
+
 /* =======================================================================
    INIT - Run all features after DOM is ready
 ======================================================================= */
@@ -61,21 +92,29 @@ async function loadHeroBackground() {
     }
 
     try {
-        const response = await fetch(
-            `https://api.unsplash.com/photos/random?query=travel,vacation,beach,destination&orientation=landscape&client_id=${UNSPLASH_ACCESS_KEY}`
-        );
-
-        if (!response.ok) throw new Error('Failed to fetch image from Unsplash');
-
-        const data = await response.json();
+        let cached = getCached('hero');
+        if (!cached) {
+            const response = await fetch(
+                `https://api.unsplash.com/photos/random?query=travel,vacation,beach,destination&orientation=landscape&client_id=${UNSPLASH_ACCESS_KEY}`
+            );
+            if (!response.ok) throw new Error('Failed to fetch image from Unsplash');
+            const data = await response.json();
+            cached = {
+                url:          data.urls.regular,
+                photoUrl:     data.links.html,
+                userName:     data.user.name,
+                userUrl:      data.user.links.html,
+            };
+            setCache('hero', cached);
+        }
 
         heroSection.style.backgroundImage =
-            `linear-gradient(rgba(30, 58, 95, 0.7), rgba(42, 157, 143, 0.7)), url('${data.urls.regular}')`;
+            `linear-gradient(rgba(30, 58, 95, 0.7), rgba(42, 157, 143, 0.7)), url('${cached.url}')`;
         heroSection.style.backgroundSize     = 'cover';
         heroSection.style.backgroundPosition = 'center';
         heroSection.style.backgroundRepeat   = 'no-repeat';
 
-        addPhotoCredit(data.user.name, data.user.links.html, data.links.html);
+        addPhotoCredit(cached.userName, cached.userUrl, cached.photoUrl);
 
     } catch (error) {
         console.error('Error loading Unsplash hero image:', error);
@@ -123,29 +162,35 @@ async function loadDestinationImages() {
     imageContainers.forEach(async (container) => {
         const destinationType = container.getAttribute('data-destination');
         const query = destinationQueries[destinationType] || 'travel';
+        const cacheKey = 'dest_' + destinationType;
 
         try {
-            const response = await fetch(
-                `https://api.unsplash.com/photos/random?query=${encodeURIComponent(query)}&orientation=landscape&client_id=${UNSPLASH_ACCESS_KEY}`
-            );
+            let cached = getCached(cacheKey);
+            if (!cached) {
+                const response = await fetch(
+                    `https://api.unsplash.com/photos/random?query=${encodeURIComponent(query)}&orientation=landscape&client_id=${UNSPLASH_ACCESS_KEY}`
+                );
+                if (!response.ok) throw new Error('Failed to fetch image');
+                const data = await response.json();
+                cached = {
+                    url:      data.urls.regular,
+                    userName: data.user.name,
+                    userUrl:  data.user.links.html,
+                };
+                setCache(cacheKey, cached);
+            }
 
-            if (!response.ok) throw new Error('Failed to fetch image');
-
-            const data   = await response.json();
             const img    = container.querySelector('.destination-image');
             const credit = container.querySelector('.image-credit');
 
-            img.src = data.urls.regular;
-            img.alt = `${destinationType} destination - Photo by ${data.user.name}`;
-
-            img.onload = function () {
-                img.classList.remove('loading-placeholder');
-            };
+            img.src = cached.url;
+            img.alt = `${destinationType} destination - Photo by ${cached.userName}`;
+            img.onload = function () { img.classList.remove('loading-placeholder'); };
 
             if (credit) {
                 credit.innerHTML = `
-                    Photo by <a href="${data.user.links.html}?utm_source=ts_travel&utm_medium=referral"
-                                target="_blank" rel="noopener">${data.user.name}</a>
+                    Photo by <a href="${cached.userUrl}?utm_source=ts_travel&utm_medium=referral"
+                                target="_blank" rel="noopener">${cached.userName}</a>
                     on <a href="https://unsplash.com?utm_source=ts_travel&utm_medium=referral"
                           target="_blank" rel="noopener">Unsplash</a>
                 `;
@@ -497,20 +542,30 @@ async function loadTripCardImages() {
     };
 
     // Deduplicate by type so we only make one API call per type
-    const seen = {};
     const fetches = {};
 
     cardImages.forEach(function (img) {
         const type = img.getAttribute('data-type');
         if (!type || fetches[type]) return;
 
-        const query = typeQueries[type] || 'travel';
-        fetches[type] = fetch(
-            `https://api.unsplash.com/photos/random?query=${encodeURIComponent(query)}&orientation=landscape&client_id=${UNSPLASH_ACCESS_KEY}`
-        ).then(function (res) {
-            if (!res.ok) throw new Error('Failed');
-            return res.json();
-        }).catch(function () { return null; });
+        const cacheKey = 'card_' + type;
+        const cached   = getCached(cacheKey);
+
+        if (cached) {
+            fetches[type] = Promise.resolve(cached);
+        } else {
+            const query = typeQueries[type] || 'travel';
+            fetches[type] = fetch(
+                `https://api.unsplash.com/photos/random?query=${encodeURIComponent(query)}&orientation=landscape&client_id=${UNSPLASH_ACCESS_KEY}`
+            ).then(function (res) {
+                if (!res.ok) throw new Error('Failed');
+                return res.json();
+            }).then(function (data) {
+                const entry = { url: data.urls.small, userName: data.user.name };
+                setCache(cacheKey, entry);
+                return entry;
+            }).catch(function () { return null; });
+        }
     });
 
     cardImages.forEach(async function (img) {
@@ -520,8 +575,7 @@ async function loadTripCardImages() {
         try {
             const data = await fetches[type];
             if (!data) { img.style.display = 'none'; return; }
-
-            img.src = data.urls.small;
+            img.src    = data.url;
             img.onload = function () { img.classList.remove('loading-placeholder'); };
         } catch (e) {
             img.style.display = 'none';
