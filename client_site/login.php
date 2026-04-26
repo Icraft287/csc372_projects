@@ -24,7 +24,7 @@ if (!empty($_SESSION['admin_logged_in'])) {
 // Current plain-text password: TsTravel2026!
 // =====================================================================
 $admin_username      = 'isaac_admin';
-$admin_password_hash = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
+$admin_password_hash = password_hash('TsTravel2026!', PASSWORD_DEFAULT);
 
 $login_error = '';
 
@@ -72,14 +72,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
     <nav class="navbar">
-        <a href="index.html" class="logo">
+        <a href="index.php" class="logo">
             <div class="logo-icon" aria-hidden="true">✈️</div>
             <span>T's Travel</span>
         </a>
         <div class="nav-links">
-            <a href="index.html" class="nav-link">Home</a>
+            <a href="index.php" class="nav-link">Home</a>
             <a href="destinations.php" class="nav-link">Destinations</a>
-            <a href="contact.html" class="contact-btn">Contact Us</a>
+            <a href="contact.php" class="contact-btn">Contact Us</a>
         </div>
     </nav>
 

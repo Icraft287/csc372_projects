@@ -890,8 +890,87 @@ body {
         padding: 12px 15px;
     }
 }
-/* ===== Trip Package Cards (database-driven — destinations.php) ===== */
+/* =====================================================================
+   NEW STYLES — All 15 improvements
+   ===================================================================== */
 
+/* -------------------------------------------------------------------
+   CHANGE #7 — NAV UNDERLINE SLIDE EFFECT
+   Each nav link gets a teal underline that slides in on hover using
+   a ::after pseudo-element and CSS transform. Much more polished than
+   the basic background color change.
+------------------------------------------------------------------- */
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent-teal);
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 80%;
+    left: 10%;
+}
+
+/* -------------------------------------------------------------------
+   CHANGE #6 — LOADING SKELETON for trip package cards
+   While the DB query runs, cards show an animated grey shimmer
+   instead of a blank flash. Applied via JS or PHP before cards load.
+   The keyframe is already in style.css as @keyframes loading —
+   these classes extend it to card elements.
+------------------------------------------------------------------- */
+.card-skeleton {
+    background: white;
+    border-radius: 15px;
+    padding: 40px 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.skeleton-block {
+    background: linear-gradient(90deg, #e8e8e8 25%, #f4f4f4 50%, #e8e8e8 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.skeleton-icon  { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 16px; }
+.skeleton-title { height: 22px; width: 75%; margin: 0 auto 10px; }
+.skeleton-badge { height: 18px; width: 40%; margin: 0 auto 12px; border-radius: 20px; }
+.skeleton-text  { height: 14px; width: 90%; margin: 0 auto 8px; }
+.skeleton-text.short { width: 60%; }
+.skeleton-meta  { height: 16px; width: 55%; margin: 16px auto 0; }
+
+/* -------------------------------------------------------------------
+   CHANGE #9 — TRIP CARD TEAL LEFT BORDER HOVER
+   Extends the existing .card hover with a teal left border accent
+   that appears on the trip package cards specifically.
+------------------------------------------------------------------- */
+.trip-package-card {
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease, border-left-color 0.3s ease;
+    text-align: center;
+}
+
+.trip-package-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    border-left-color: var(--accent-teal);
+    border-color: var(--accent-teal);
+}
+
+/* -------------------------------------------------------------------
+   TRIP PACKAGE CARD META STYLES
+------------------------------------------------------------------- */
 .trip-type-badge {
     display: inline-block;
     background: var(--accent-teal);
@@ -927,7 +1006,6 @@ body {
     color: #666;
 }
 
-/* "View Details" link on each trip card */
 .trip-detail-link {
     display: inline-block;
     margin-top: 14px;
@@ -938,12 +1016,57 @@ body {
     transition: color 0.2s ease;
 }
 
-.trip-detail-link:hover {
+.trip-detail-link:hover { color: var(--accent-teal); }
+
+/* -------------------------------------------------------------------
+   CHANGE #3 — INQUIRY COUNT BADGE on trip cards
+------------------------------------------------------------------- */
+.inquiry-count-badge {
+    font-size: 0.82rem;
+    color: var(--coral-accent);
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+/* -------------------------------------------------------------------
+   CHANGE #15 — FILTER BAR (trip type buttons)
+------------------------------------------------------------------- */
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    border: 2px solid var(--light-gray);
+    border-radius: 25px;
+    background: white;
+    color: var(--text-dark);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.filter-btn:hover {
+    border-color: var(--accent-teal);
     color: var(--accent-teal);
 }
 
-/* ===== Trip Detail Page (trip.php) ===== */
+.filter-btn.active {
+    background: var(--accent-teal);
+    border-color: var(--accent-teal);
+    color: white;
+}
 
+/* -------------------------------------------------------------------
+   TRIP DETAIL PAGE (trip.php)
+------------------------------------------------------------------- */
 .trip-detail-meta {
     display: flex;
     gap: 30px;
@@ -975,13 +1098,117 @@ body {
     color: var(--primary-blue);
 }
 
-/* ===== Admin Page (admin.php) ===== */
+/* -------------------------------------------------------------------
+   PHP FORM VALIDATION SHARED STYLES
+------------------------------------------------------------------- */
+.form-message {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 1rem;
+}
 
-.admin-wrapper {
+.form-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 2px solid #c3e6cb;
+}
+
+.form-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 2px solid #f5c6cb;
+}
+
+.error-msg {
+    display: block;
+    color: #cc0000;
+    font-size: 0.875rem;
+    margin-top: 6px;
+}
+
+/* Highlight input border red when client-side validation fires */
+.input-error {
+    border-color: #cc0000 !important;
+}
+
+.radio-fieldset { border: none; padding: 0; margin: 0; }
+
+.radio-fieldset legend {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+    width: auto;
+    padding: 0;
+    border: none;
+    accent-color: var(--accent-teal);
+    cursor: pointer;
+}
+
+/* -------------------------------------------------------------------
+   VISITOR INFO PANEL (cookies & sessions)
+------------------------------------------------------------------- */
+.visitor-info-section { background: var(--deep-ocean); padding: 30px 40px; }
+
+.visitor-info-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
     max-width: 900px;
     margin: 0 auto;
-    padding: 40px 20px;
 }
+
+.visitor-info-group {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 25px;
+    color: white;
+}
+
+.visitor-info-group h3 { font-family: 'Playfair Display',serif; font-size:1.1rem; margin-bottom:15px; color:white; }
+.visitor-info-group ul { list-style:none; padding:0; }
+.visitor-info-group ul li { padding:6px 0; font-size:0.95rem; border-bottom:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.9); }
+.visitor-info-group ul li:last-child { border-bottom:none; }
+
+.info-label { font-size:0.75rem; font-weight:400; color:var(--accent-teal); font-family:'Lato',sans-serif; }
+
+.clear-session-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 18px;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 20px;
+    color: white;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.clear-session-btn:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: var(--accent-teal);
+    color: var(--accent-teal);
+}
+
+/* -------------------------------------------------------------------
+   ADMIN PAGE
+------------------------------------------------------------------- */
+.admin-wrapper { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
 
 .admin-section {
     background: white;
@@ -992,85 +1219,107 @@ body {
     transition: border-color 0.3s ease;
 }
 
-.admin-section:hover {
-    border-color: var(--accent-teal);
-}
+.admin-section:hover { border-color: var(--accent-teal); }
+.admin-section h2 { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--primary-blue); margin-bottom:20px; }
 
-.admin-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: var(--primary-blue);
-    margin-bottom: 20px;
-}
+.admin-table-wrapper { overflow-x: auto; }
+.admin-table { width:100%; border-collapse:collapse; font-size:0.95rem; }
+.admin-table th { background:var(--primary-blue); color:white; padding:12px 15px; text-align:left; font-weight:600; }
+.admin-table td { padding:10px 15px; border-bottom:1px solid var(--light-gray); color:var(--text-dark); }
+.admin-table tr:nth-child(even) td { background:#f9f9f9; }
+.admin-table tr:hover td { background:var(--warm-sand); }
 
-/* Admin data table */
-.admin-table-wrapper {
-    overflow-x: auto;
-}
+.admin-view-link { color:var(--accent-teal); font-weight:600; text-decoration:none; font-size:0.9rem; }
+.admin-view-link:hover { color:var(--primary-blue); }
 
-.admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.95rem;
-}
-
-.admin-table th {
-    background: var(--primary-blue);
-    color: white;
-    padding: 12px 15px;
-    text-align: left;
-    font-weight: 600;
-}
-
-.admin-table td {
-    padding: 10px 15px;
-    border-bottom: 1px solid var(--light-gray);
-    color: var(--text-dark);
-}
-
-.admin-table tr:nth-child(even) td {
-    background: #f9f9f9;
-}
-
-.admin-table tr:hover td {
-    background: var(--warm-sand);
-}
-
-.admin-view-link {
-    color: var(--accent-teal);
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
-
-.admin-view-link:hover {
-    color: var(--primary-blue);
-}
-
-/* Admin forms */
-.admin-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    align-items: start;
-}
-
-.admin-form .form-group {
-    margin-bottom: 0;
-}
-
-/* Description textarea and submit button span full width */
+.admin-form { display:grid; grid-template-columns:1fr 1fr; gap:15px; align-items:start; }
+.admin-form .form-group { margin-bottom:0; }
 .admin-form .form-group:has(textarea),
-.admin-form button[type="submit"] {
-    grid-column: 1 / -1;
-}
+.admin-form button[type="submit"] { grid-column:1 / -1; }
 
-@media (max-width: 600px) {
+/* -------------------------------------------------------------------
+   CHANGE #8 — MOBILE FORM IMPROVEMENTS
+   Larger tap targets and more breathing room on small screens.
+------------------------------------------------------------------- */
+@media (max-width: 480px) {
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 14px;
+        font-size: 1rem;
+        /* Prevents iOS from zooming in on focus (needs min 16px) */
+        font-size: max(16px, 1rem);
+    }
+
+    .form-group label {
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+    }
+
+    .contact-layout {
+        padding: 30px 15px;
+    }
+
     .admin-form {
         grid-template-columns: 1fr;
     }
+}
 
-    .trip-detail-meta {
-        flex-direction: column;
+/* -------------------------------------------------------------------
+   CHANGE #10 — DARK MODE
+   Overrides CSS variables when the OS/browser is in dark mode.
+   Uses the existing variable system so all colours flip automatically.
+------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-blue:  #3a6fa8;
+        --accent-teal:   #3bbfb0;
+        --warm-sand:     #2a2520;
+        --deep-ocean:    #1a2530;
+        --coral-accent:  #e07050;
+        --soft-white:    #1a1a1a;
+        --light-gray:    #333333;
+        --text-dark:     #e0e0e0;
     }
+
+    body { background: #1a1a1a; color: #e0e0e0; }
+
+    .card, .service-category, .about-content, .inquiry-form, .admin-section {
+        background: #252525;
+        border-color: #333;
+        color: #e0e0e0;
+    }
+
+    .card h3, .service-category h2 { color: #7ab8e8; }
+    .card p, .service-description   { color: #c0c0c0; }
+
+    .navbar { background: #0f1e30; }
+
+    .admin-table td  { color: #e0e0e0; }
+    .admin-table tr:nth-child(even) td { background: #2a2a2a; }
+    .admin-table tr:hover td           { background: #2a2520; }
+
+    .filter-btn { background: #252525; color: #e0e0e0; border-color: #444; }
+    .filter-btn:hover  { border-color: var(--accent-teal); color: var(--accent-teal); }
+    .filter-btn.active { background: var(--accent-teal); color: white; }
+
+    .trip-detail-item { background: #252520; }
+
+    .form-message.success { background: #1a3a22; color: #7ec892; border-color: #2d6040; }
+    .form-message.error   { background: #3a1a1a; color: #e08080; border-color: #6a2a2a; }
+
+    /* Keep hero readable */
+    .hero { background: linear-gradient(135deg, #1a7060 0%, #0f1e30 100%); }
+}
+
+/* Existing responsive additions for new elements */
+@media (max-width: 768px) {
+    .visitor-info-panel { grid-template-columns: 1fr; }
+    .visitor-info-section { padding: 25px 20px; }
+    .trip-detail-meta { flex-direction: column; }
+    .filter-bar { gap: 8px; }
+    .filter-btn { padding: 7px 14px; font-size: 0.82rem; }
+    .admin-form { grid-template-columns: 1fr; }
+    .radio-label { font-size: 0.95rem; }
+    .form-message { font-size: 0.95rem; padding: 12px 15px; }
 }

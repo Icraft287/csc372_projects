@@ -108,7 +108,7 @@ $icons = [
 
     <!-- Navigation -->
     <nav class="navbar">
-        <a href="index.html" class="logo">
+        <a href="index.php" class="logo">
             <div class="logo-icon" aria-hidden="true">✈️</div>
             <span>T's Travel</span>
         </a>
@@ -118,11 +118,11 @@ $icons = [
             <span></span>
         </div>
         <div class="nav-links">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="about.html" class="nav-link">About</a>
-            <a href="services.html" class="nav-link">Services</a>
+            <a href="index.php" class="nav-link">Home</a>
+            <a href="about.php" class="nav-link">About</a>
+            <a href="services.php" class="nav-link">Services</a>
             <a href="destinations.php" class="nav-link active">Destinations</a>
-            <a href="contact.html" class="contact-btn">Contact Us</a>
+            <a href="contact.php" class="contact-btn">Contact Us</a>
         </div>
     </nav>
 
@@ -213,11 +213,11 @@ $icons = [
 
     <footer class="footer">
         <nav class="footer-links" aria-label="Footer navigation">
-            <a href="index.html" class="footer-link">Home</a>
-            <a href="about.html" class="footer-link">About</a>
-            <a href="services.html" class="footer-link">Services</a>
+            <a href="index.php" class="footer-link">Home</a>
+            <a href="about.php" class="footer-link">About</a>
+            <a href="services.php" class="footer-link">Services</a>
             <a href="destinations.php" class="footer-link">Destinations</a>
-            <a href="contact.html" class="footer-link">Contact</a>
+            <a href="contact.php" class="footer-link">Contact</a>
         </nav>
         <div class="footer-bottom">
             <p>&copy; 2026 T's Travel. All rights reserved.</p>

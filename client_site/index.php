@@ -42,7 +42,7 @@
 
         <!-- Client logo display section -->
         <div class="logo-section">
-            <img src="images/client_logo.png" alt="Client Logo" class="client-logo">
+            <img src="images/client_logov2.png" alt="Client Logo" class="client-logo">
         </div>
         
         <!-- Hamburger menu toggle (mobile) -->
