@@ -37,12 +37,12 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <a href="index.php" class="logo">
-            <span>T's Travel</span>
+            <span style="font-size: 4rem; font-weight: 500;">T's Travel</span>
         </a>
 
         <!-- Client logo display section -->
         <div class="logo-section">
-            <img src="images/client_logov2.png" alt="Client Logo" class="client-logo">
+            <img src="images/client_logov4.png" alt="Client Logo" class="client-logo">
         </div>
         
         <!-- Hamburger menu toggle (mobile) -->

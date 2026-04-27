@@ -67,11 +67,14 @@
             <article class="about-content">
                 <!-- Our Story -->
                 <h2>Our Story</h2>
+
+
                 <p>At T's Travel, we believe that travel is more than just visiting new places—it's about creating memories that last a lifetime. As a dedicated travel professional, I'm passionate about helping individuals, couples, families, and retirees plan vacations that exceed their expectations.</p>
                 
                 <p>With years of experience in the travel industry and a personal love for exploring the world, I understand what makes a trip truly special. From the initial consultation to the moment you return home, I'm committed to providing personalized service and expert guidance every step of the way.</p>
 
                 <!-- Why Choose Us -->
+                <br>
                 <h2>Why Choose Us</h2>
                 <p>Planning a vacation can be overwhelming. There are countless options, endless research, and the stress of making sure everything is perfect. That's where I come in. I take the hassle out of travel planning by:</p>
                 
@@ -86,6 +89,7 @@
                 <p>Whether you're dreaming of a Caribbean cruise, a European adventure, an all-inclusive resort getaway, or a custom-designed journey, I'm here to make it happen.</p>
 
                 <!-- Our Mission -->
+                <br> 
                 <h2>Our Mission</h2>
                 <p>My mission is simple: to help clients confidently plan memorable travel experiences without the hassle of researching and booking everything on their own. I believe that working with a dedicated travel professional means less stress, better value, and more enjoyment from start to finish.</p>
             </article>
