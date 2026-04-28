@@ -115,31 +115,10 @@ if (ctype_digit($edit_id) && (int)$edit_id > 0) {
 
 // Fetch all trips for the table display
 $all_trips = $pdo->query("SELECT * FROM trips ORDER BY trip_id ASC")->fetchAll();
+$page_title  = "Admin - T's Travel";
+$active_page = 'admin';
+require_once 'header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - T's Travel</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=2">
-</head>
-<body>
-
-    <nav class="navbar">
-        <a href="index.php" class="logo">
-            <div class="logo-icon" aria-hidden="true">✈️</div>
-            <span>T's Travel</span>
-        </a>
-        <div class="nav-links">
-            <a href="index.php" class="nav-link">Home</a>
-            <a href="destinations.php" class="nav-link">Destinations</a>
-            <a href="logout.php" class="nav-link" style="color:#ffaaaa;">Log Out</a>
-        </div>
-    </nav>
 
     <header class="hero">
         <div class="hero-content">
@@ -319,15 +298,5 @@ $all_trips = $pdo->query("SELECT * FROM trips ORDER BY trip_id ASC")->fetchAll()
         </div>
     </main>
 
-    <footer class="footer">
-        <nav class="footer-links" aria-label="Footer navigation">
-            <a href="index.php" class="footer-link">Home</a>
-            <a href="destinations.php" class="footer-link">Destinations</a>
-            <a href="contact.php" class="footer-link">Contact</a>
-        </nav>
-        <div class="footer-bottom"><p>&copy; 2026 T's Travel. All rights reserved.</p></div>
-    </footer>
 
-    <script src="js/server.js"></script>
-</body>
-</html>
+<?php require_once 'footer.php'; ?>

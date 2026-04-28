@@ -50,6 +50,7 @@ if (isset($_SESSION['success_message'])) {
 // =====================================================================
 require_once 'validate.php';
 require_once 'db.php';
+require_once 'destination.class.php';
 
 // =====================================================================
 // QUERY STRING FILTER (#1 new feature)
@@ -171,40 +172,6 @@ foreach ($inquiry_counts_raw as $row) {
 }
 
 // =====================================================================
-// CLASS DEFINITION
-// =====================================================================
-class Destination {
-    public string $name;
-    public string $icon;
-    public string $description;
-    public string $anchor;
-    public string $altText;
-    public string $bgColor;
-    private array $spots;
-
-    public function __construct(
-        string $name, string $icon, string $description,
-        string $anchor, string $altText, array $spots, string $bgColor = ""
-    ) {
-        $this->name = $name; $this->icon = $icon; $this->description = $description;
-        $this->anchor = $anchor; $this->altText = $altText;
-        $this->spots = $spots; $this->bgColor = $bgColor;
-    }
-
-    public function getHeaderTitle(): string { return $this->icon . " " . $this->name; }
-    public function getSpotsCount(): int { return count($this->spots); }
-
-    public function renderSpots(): string {
-        $html = '<div class="service-details">';
-        foreach ($this->spots as $spot) {
-            $html .= '<div class="service-feature"><h3>' . htmlspecialchars($spot['name'])
-                  . '</h3><p>' . htmlspecialchars($spot['desc']) . '</p></div>';
-        }
-        return $html . '</div>';
-    }
-}
-
-// =====================================================================
 // DESTINATION OBJECTS
 // =====================================================================
 $caribbean = new Destination("Caribbean Paradise","🌴",
@@ -243,18 +210,11 @@ $romantic = new Destination("Romantic Getaways","💑",
 $destinations = [$caribbean, $europe, $cruises, $romantic];
 
 $icons = ['adventure'=>'🏔️','relaxation'=>'🌴','cultural'=>'🏛️','family'=>'👨‍👩‍👧‍👦'];
+$page_title       = "Destinations - T's Travel";
+$meta_description = "Explore popular travel destinations with T's Travel";
+$active_page      = 'destinations';
+require_once 'header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore popular travel destinations with T's Travel">
-    <title>Destinations - T's Travel</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=2">
     <style>
         /* Trip card header image */
         .card-trip-image {
@@ -312,24 +272,7 @@ $icons = ['adventure'=>'🏔️','relaxation'=>'🌴','cultural'=>'🏛️','fam
             border-color: var(--accent-teal);
         }
     </style>
-</head>
 <body>
-    <nav class="navbar">
-        <a href="index.php" class="logo">
-            <div class="logo-icon" aria-hidden="true">✈️</div>
-            <span>T's Travel</span>
-        </a>
-        <div class="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
-            <span></span><span></span><span></span>
-        </div>
-        <div class="nav-links">
-            <a href="index.php" class="nav-link">Home</a>
-            <a href="about.php" class="nav-link">About</a>
-            <a href="services.php" class="nav-link">Services</a>
-            <a href="destinations.php" class="nav-link active">Destinations</a>
-            <a href="contact.php" class="contact-btn">Contact Us</a>
-        </div>
-    </nav>
 
     <header class="hero">
         <div class="hero-content">
@@ -560,24 +503,5 @@ $icons = ['adventure'=>'🏔️','relaxation'=>'🌴','cultural'=>'🏛️','fam
 
     </main>
 
-    <footer class="footer">
-        <nav class="footer-links" aria-label="Footer navigation">
-            <a href="index.php" class="footer-link">Home</a>
-            <a href="about.php" class="footer-link">About</a>
-            <a href="services.php" class="footer-link">Services</a>
-            <a href="destinations.php" class="footer-link">Destinations</a>
-            <a href="contact.php" class="footer-link">Contact</a>
-        </nav>
-        <div class="footer-bottom">
-            <p>&copy; 2026 T's Travel. All rights reserved.</p>
-            <div class="social-links">
-                <a href="#" class="social-link" aria-label="Facebook">Facebook</a>
-                <a href="#" class="social-link" aria-label="Instagram">Instagram</a>
-                <a href="#" class="social-link" aria-label="Twitter">Twitter</a>
-            </div>
-        </div>
-    </footer>
 
-    <script src="js/server.js"></script>
-</body>
-</html>
+<?php require_once 'footer.php'; ?>

@@ -21,10 +21,9 @@ if (!empty($_SESSION['admin_logged_in'])) {
 // CREDENTIALS
 // The password is stored as a bcrypt hash — never as plain text.
 // To regenerate: echo password_hash('your_password', PASSWORD_DEFAULT);
-// Current plain-text password: TsTravel2026!
 // =====================================================================
 $admin_username      = 'isaac_admin';
-$admin_password_hash = password_hash('TsTravel2026!', PASSWORD_DEFAULT);
+$admin_password_hash = '$2y$12$Qm33bREhMMVdX7KwrcHnNe9p5xeocgbciOv2Vvc24Z.4oyM5VyVdu';
 
 $login_error = '';
 
@@ -51,37 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $login_error = 'Invalid username or password. Please try again.';
     }
 }
+$page_title  = "Admin Login - T's Travel";
+$active_page = 'login';
+require_once 'header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - T's Travel</title>
-    <!-- Preconnect to Google Fonts servers to reduce DNS lookup time -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!--
-        display=swap tells the browser to render text in a fallback font immediately
-        while Playfair Display and Lato load in the background.
-        This prevents the page from being blank while waiting for fonts.
-    -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=2">
-</head>
-<body>
-
-    <nav class="navbar">
-        <a href="index.php" class="logo">
-            <div class="logo-icon" aria-hidden="true">✈️</div>
-            <span>T's Travel</span>
-        </a>
-        <div class="nav-links">
-            <a href="index.php" class="nav-link">Home</a>
-            <a href="destinations.php" class="nav-link">Destinations</a>
-            <a href="contact.php" class="contact-btn">Contact Us</a>
-        </div>
-    </nav>
 
     <header class="hero">
         <div class="hero-content">
@@ -130,11 +102,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="footer-bottom">
-            <p>&copy; 2026 T's Travel. All rights reserved.</p>
-        </div>
-    </footer>
 
-</body>
-</html>
+<?php $footer_minimal = true; require_once 'footer.php'; ?>

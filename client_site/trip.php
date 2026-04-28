@@ -81,50 +81,10 @@ $icons = [
     'cultural'   => '🏛️',
     'family'     => '👨‍👩‍👧‍👦',
 ];
+$page_title  = $trip ? htmlspecialchars($trip['trip_name']) . " - T's Travel" : "Trip Not Found - T's Travel";
+$active_page = 'destinations';
+require_once 'header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?php
-        // Step 5 continued: escape and display the trip name in the title if available
-        echo $trip ? htmlspecialchars($trip['trip_name']) . ' - T\'s Travel' : 'Trip Not Found - T\'s Travel';
-        ?>
-    </title>
-    <!-- Preconnect to Google Fonts servers to reduce DNS lookup time -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!--
-        display=swap tells the browser to render text in a fallback font immediately
-        while Playfair Display and Lato load in the background.
-        This prevents the page from being blank while waiting for fonts.
-    -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=2">
-</head>
-<body>
-
-    <!-- Navigation -->
-    <nav class="navbar">
-        <a href="index.php" class="logo">
-            <div class="logo-icon" aria-hidden="true">✈️</div>
-            <span>T's Travel</span>
-        </a>
-        <div class="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="nav-links">
-            <a href="index.php" class="nav-link">Home</a>
-            <a href="about.php" class="nav-link">About</a>
-            <a href="services.php" class="nav-link">Services</a>
-            <a href="destinations.php" class="nav-link active">Destinations</a>
-            <a href="contact.php" class="contact-btn">Contact Us</a>
-        </div>
-    </nav>
 
     <header class="hero">
         <div class="hero-content">
@@ -211,19 +171,5 @@ $icons = [
         </section>
     </main>
 
-    <footer class="footer">
-        <nav class="footer-links" aria-label="Footer navigation">
-            <a href="index.php" class="footer-link">Home</a>
-            <a href="about.php" class="footer-link">About</a>
-            <a href="services.php" class="footer-link">Services</a>
-            <a href="destinations.php" class="footer-link">Destinations</a>
-            <a href="contact.php" class="footer-link">Contact</a>
-        </nav>
-        <div class="footer-bottom">
-            <p>&copy; 2026 T's Travel. All rights reserved.</p>
-        </div>
-    </footer>
 
-    <script src="js/server.js"></script>
-</body>
-</html>
+<?php require_once 'footer.php'; ?>

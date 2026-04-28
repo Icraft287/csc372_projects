@@ -115,37 +115,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $form_message = 'Please correct the errors below and try again.';
     }
 }
+$page_title       = "Contact Us - T's Travel";
+$meta_description = "Contact T's Travel - Get in touch to start planning your dream vacation today";
+$active_page      = 'contact';
+require_once 'header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contact T's Travel - Get in touch to start planning your dream vacation today">
-    <title>Contact Us - T's Travel</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=2">
-</head>
-<body>
-
-    <nav class="navbar">
-        <a href="index.php" class="logo">
-            <div class="logo-icon" aria-hidden="true">✈️</div>
-            <span>T's Travel</span>
-        </a>
-        <div class="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
-            <span></span><span></span><span></span>
-        </div>
-        <div class="nav-links">
-            <a href="index.php" class="nav-link">Home</a>
-            <a href="about.php" class="nav-link">About</a>
-            <a href="services.php" class="nav-link">Services</a>
-            <a href="destinations.php" class="nav-link">Destinations</a>
-            <a href="contact.php" class="contact-btn active">Contact Us</a>
-        </div>
-    </nav>
 
     <header class="hero">
         <div class="hero-content">
@@ -316,24 +290,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </main>
 
-    <footer class="footer">
-        <nav class="footer-links" aria-label="Footer navigation">
-            <a href="index.php" class="footer-link">Home</a>
-            <a href="about.php" class="footer-link">About</a>
-            <a href="services.php" class="footer-link">Services</a>
-            <a href="destinations.php" class="footer-link">Destinations</a>
-            <a href="contact.php" class="footer-link">Contact</a>
-        </nav>
-        <div class="footer-bottom">
-            <p>&copy; 2026 T's Travel. All rights reserved.</p>
-            <div class="social-links">
-                <a href="#" class="social-link" aria-label="Facebook">Facebook</a>
-                <a href="#" class="social-link" aria-label="Instagram">Instagram</a>
-                <a href="#" class="social-link" aria-label="Twitter">Twitter</a>
-            </div>
-        </div>
-    </footer>
 
-    <script src="js/server.js"></script>
-</body>
-</html>
+<?php require_once 'footer.php'; ?>

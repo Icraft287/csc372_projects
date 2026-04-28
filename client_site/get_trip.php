@@ -16,6 +16,7 @@ session_start();
 // Only admins can access this endpoint
 if (empty($_SESSION['admin_logged_in'])) {
     http_response_code(403);
+    header('Content-Type: application/json');
     echo json_encode(['error' => 'Unauthorized']);
     exit;
 }
@@ -27,6 +28,7 @@ $raw_id = $_GET['id'] ?? '';
 
 if (!ctype_digit($raw_id) || (int)$raw_id < 1) {
     http_response_code(400);
+    header('Content-Type: application/json');
     echo json_encode(['error' => 'Invalid ID']);
     exit;
 }
@@ -37,6 +39,7 @@ $trip = $stmt->fetch();
 
 if (!$trip) {
     http_response_code(404);
+    header('Content-Type: application/json');
     echo json_encode(['error' => 'Not found']);
     exit;
 }
