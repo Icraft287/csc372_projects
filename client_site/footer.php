@@ -21,8 +21,10 @@ $footer_minimal = $footer_minimal ?? false;
             <a href="contact.php"      class="footer-link">Contact</a>
         </nav>
         <?php endif; ?>
+        
         <div class="footer-bottom">
             <p>&copy; 2026 T's Travel. All rights reserved.</p>
+            
             <?php if (!$footer_minimal): ?>
             <div class="social-links">
                 <a href="https://www.facebook.com"  class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook page">Facebook</a>
@@ -31,8 +33,35 @@ $footer_minimal = $footer_minimal ?? false;
             </div>
             <?php endif; ?>
         </div>
+
+        <!-- Back to Top Button -->
+        <button id="back-to-top" class="back-to-top" aria-label="Scroll back to top of page">
+            ↑
+        </button>
     </footer>
 
     <script src="js/server.js"></script>
+
+    <!-- Back to Top Script -->
+    <script>
+        const backToTopButton = document.getElementById('back-to-top');
+
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        // Smooth scroll to top when clicked
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html>
