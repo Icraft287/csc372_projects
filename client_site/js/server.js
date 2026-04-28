@@ -1,6 +1,6 @@
 /**
  * File: server.js
- * Author: Isaac Crft
+ * Author: Isaac Craft
  * Date: February 14, 2026
  * Description: Main JavaScript for T's Travel website.
  *
@@ -356,9 +356,12 @@ function initContactValidation() {
 
     // ---------------------------------------------------------------
     // Original alert-based validation fallback (preserved)
+    // Only runs on pages that actually have the contact form fields.
+    // Without this guard, the fallback hijacks ANY form on the page
+    // (e.g. login.php) and fires the alert instead of submitting.
     // ---------------------------------------------------------------
     const form = document.querySelector('form');
-    if (form) {
+    if (form && document.getElementById('name') && document.getElementById('email')) {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 

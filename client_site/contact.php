@@ -1,7 +1,7 @@
 <?php
 /*
     File: contact.php
-    Author: Isaac Crft
+    Author: Isaac Craft
     Date: February 14, 2026
     Description: Contact page for T's Travel. Updated to process the
                  inquiry form server-side with PHP validation and INSERT
@@ -164,8 +164,11 @@ require_once 'header.php';
                     <div class="info-icon" aria-hidden="true">📍</div>
                     <div>
                         <strong style="display:block;margin-bottom:5px;">Office Location</strong>
-                        <span>123 Travel Lane, Suite 456</span><br>
-                        <span>Wanderlust City, ST 12345</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=123+Travel+Lane+Suite+456+Wanderlust+City+ST+12345"
+                           target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:none;">
+                            <span>123 Travel Lane, Suite 456</span><br>
+                            <span>Wanderlust City, ST 12345</span>
+                        </a>
                     </div>
                 </div>
                 <div class="info-item">

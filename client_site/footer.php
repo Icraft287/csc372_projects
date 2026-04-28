@@ -1,7 +1,7 @@
 <?php
 /*
     File: footer.php
-    Author: Isaac Crft
+    Author: Isaac Craft
     Date: March 25, 2026
     Description: Shared footer include for T's Travel.
                  Used by all pages except login.php (which has a stripped-down footer).
@@ -25,9 +25,9 @@ $footer_minimal = $footer_minimal ?? false;
             <p>&copy; 2026 T's Travel. All rights reserved.</p>
             <?php if (!$footer_minimal): ?>
             <div class="social-links">
-                <a href="#" class="social-link" aria-label="Visit our Facebook page">Facebook</a>
-                <a href="#" class="social-link" aria-label="Visit our Instagram page">Instagram</a>
-                <a href="#" class="social-link" aria-label="Visit our Twitter page">Twitter</a>
+                <a href="https://www.facebook.com"  class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook page">Facebook</a>
+                <a href="https://www.instagram.com" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Visit our Instagram page">Instagram</a>
+                <a href="https://www.twitter.com"   class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Visit our Twitter page">Twitter</a>
             </div>
             <?php endif; ?>
         </div>

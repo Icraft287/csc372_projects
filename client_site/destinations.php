@@ -1,7 +1,7 @@
 <?php
 /*
     File: destinations.php
-    Author: Isaac Crft
+    Author: Isaac Craft
     Date: March 25, 2026
     Description: Destinations page for T's Travel. Updated with:
                  - INSERT into inquiries table on successful form submit
@@ -9,6 +9,7 @@
                  - ?type= query string filter for trip packages
                  - Trip type filter buttons (JS-powered client-side)
                  - PRG pattern, cookies, sessions, validation
+                 - Visitor info panel hidden behind a toggle button
                  Claude AI was used to assist with comments and structure.
 */
 
@@ -54,12 +55,9 @@ require_once 'destination.class.php';
 
 // =====================================================================
 // QUERY STRING FILTER (#1 new feature)
-// Visitor can filter packages by type: destinations.php?type=adventure
-// Validate against allowed list before using in query.
 // =====================================================================
 $allowed_trip_types = ['adventure', 'relaxation', 'cultural', 'family'];
 $filter_type = $_GET['type'] ?? '';
-// Only use the filter if it's a valid option — otherwise show all
 if (!in_array($filter_type, $allowed_trip_types)) {
     $filter_type = '';
 }
@@ -92,12 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($all_errors === '') {
 
-        // -------------------------------------------------------
-        // CHANGE #2: INSERT into inquiries table
-        // Look up the trip_id that matches the selected trip_type,
-        // then insert a full inquiry record into the database.
-        // Uses a prepared statement with ? placeholders throughout.
-        // -------------------------------------------------------
         $id_stmt = $pdo->prepare("SELECT trip_id FROM trips WHERE trip_type = ? LIMIT 1");
         $id_stmt->execute([$values['trip_type']]);
         $matched_trip = $id_stmt->fetch();
@@ -114,7 +106,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             (int)$values['travelers'],
         ]);
 
-        // Save visitor name cookie
         setcookie('visitor_name', $values['full_name'], [
             'expires'  => time() + (30 * 24 * 60 * 60),
             'path'     => '/',
@@ -141,16 +132,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // =====================================================================
 // DATABASE QUERY: trips with optional type filter
-// CHANGE #4: ?type= query string filters what cards are shown
 // =====================================================================
 if ($filter_type !== '') {
-    // Filtered: prepared statement because $filter_type comes from user input
     $sql  = "SELECT trip_id, trip_name, trip_type, description, price_per_person, max_travelers
              FROM trips WHERE trip_type = ? ORDER BY price_per_person ASC";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$filter_type]);
 } else {
-    // No filter — show all trips
     $sql  = "SELECT trip_id, trip_name, trip_type, description, price_per_person, max_travelers
              FROM trips ORDER BY price_per_person ASC";
     $stmt = $pdo->query($sql);
@@ -158,14 +146,10 @@ if ($filter_type !== '') {
 $trips = $stmt->fetchAll();
 
 // =====================================================================
-// CHANGE #3: Inquiry count per trip
-// Query COUNT(*) from inquiries grouped by trip_id so each card can
-// display "X people have inquired" — fetched as an associative array
-// keyed by trip_id for fast lookup in the card loop below.
+// INQUIRY COUNT PER TRIP
 // =====================================================================
 $count_stmt   = $pdo->query("SELECT trip_id, COUNT(*) AS inquiry_count FROM inquiries GROUP BY trip_id");
 $inquiry_counts_raw = $count_stmt->fetchAll();
-// Build a lookup array: [trip_id => inquiry_count]
 $inquiry_counts = [];
 foreach ($inquiry_counts_raw as $row) {
     $inquiry_counts[(int)$row['trip_id']] = (int)$row['inquiry_count'];
@@ -271,6 +255,55 @@ require_once 'header.php';
             outline: none;
             border-color: var(--accent-teal);
         }
+
+        /* ── Tracking toggle button ── */
+        .tracking-toggle-wrap {
+            display: flex;
+            justify-content: flex-end;
+            padding: 14px 24px 0;
+        }
+        .tracking-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 2px solid var(--accent-teal);
+            color: var(--accent-teal);
+            font-family: 'Lato', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.18s, color 0.18s;
+        }
+        .tracking-toggle-btn:hover {
+            background: var(--accent-teal);
+            color: #fff;
+        }
+        .tracking-toggle-btn .toggle-arrow {
+            display: inline-block;
+            transition: transform 0.22s;
+            font-style: normal;
+        }
+        .tracking-toggle-btn[aria-expanded="true"] .toggle-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* ── Collapsible panel animation ── */
+        .visitor-info-section {
+            overflow: hidden;
+            max-height: 0;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            transition: max-height 0.35s ease, padding 0.25s ease;
+        }
+        .visitor-info-section.is-open {
+            max-height: 400px; /* tall enough for content */
+            padding-top: revert !important;
+            padding-bottom: revert !important;
+        }
     </style>
 <body>
 
@@ -283,8 +316,23 @@ require_once 'header.php';
 
     <main>
 
-        <!-- VISITOR INFO PANEL -->
-        <section class="content-section visitor-info-section">
+        <!-- ============================================================
+             TRACKING TOGGLE BUTTON
+             Sits just above the collapsible visitor-info panel.
+        ============================================================ -->
+        <div class="tracking-toggle-wrap">
+            <button class="tracking-toggle-btn"
+                    id="tracking-toggle-btn"
+                    aria-expanded="false"
+                    aria-controls="visitor-info-section">
+                🔍 Show Tracking Info <i class="toggle-arrow" aria-hidden="true">▾</i>
+            </button>
+        </div>
+
+        <!-- VISITOR INFO PANEL (hidden by default) -->
+        <section class="content-section visitor-info-section"
+                 id="visitor-info-section"
+                 aria-hidden="true">
             <div class="visitor-info-panel">
                 <div class="visitor-info-group">
                     <h3>🍪 Your Visit Info <span class="info-label">(stored in cookies)</span></h3>
@@ -320,9 +368,6 @@ require_once 'header.php';
 
         <!-- ============================================================
              FEATURED TRIP PACKAGES
-             CHANGE #3: Each card shows inquiry count from the DB.
-             CHANGE #4: Active filter shown in heading; ?type= param used.
-             CHANGE #15: Filter buttons above cards (JS-powered).
         ============================================================ -->
         <section class="content-section" id="trip-packages">
             <h2 class="section-title">
@@ -334,7 +379,6 @@ require_once 'header.php';
                 <?php endif; ?>
             </h2>
 
-            <!-- CHANGE #15: Filter buttons — JS hides/shows cards client-side -->
             <div class="filter-bar" id="filter-bar">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="adventure">🏔️ Adventure</button>
@@ -343,7 +387,6 @@ require_once 'header.php';
                 <button class="filter-btn" data-filter="family">👨‍👩‍👧‍👦 Family</button>
             </div>
 
-            <!-- Search + sort bar — JS powered -->
             <div class="search-sort-bar">
                 <input type="text" id="trip-search" placeholder="🔍 Search packages by name...">
                 <select id="trip-sort">
@@ -365,10 +408,6 @@ require_once 'header.php';
                         $icon = $icons[$trip['trip_type']] ?? '✈️';
                         $count = $inquiry_counts[$tid] ?? 0;
                     ?>
-                        <!--
-                            data-type attribute lets the JS filter buttons
-                            show/hide this card without a page reload.
-                        -->
                         <article class="card trip-package-card"
                                  data-type="<?= htmlspecialchars($trip['trip_type']) ?>"
                                  data-price="<?= number_format((float)$trip['price_per_person'], 2, '.', '') ?>">
@@ -389,7 +428,6 @@ require_once 'header.php';
                                     Up to <?= (int)$trip['max_travelers'] ?> travelers
                                 </span>
                             </div>
-                            <!-- CHANGE #3: inquiry count from DB -->
                             <?php if ($count > 0): ?>
                                 <p class="inquiry-count-badge">
                                     🔥 <?= $count ?> <?= $count === 1 ? 'person has' : 'people have' ?> inquired
@@ -503,5 +541,24 @@ require_once 'header.php';
 
     </main>
 
+    <!-- ================================================================
+         TRACKING TOGGLE SCRIPT
+         Toggles .is-open on the panel and updates button label/aria state.
+    ================================================================ -->
+    <script>
+    (function () {
+        const btn   = document.getElementById('tracking-toggle-btn');
+        const panel = document.getElementById('visitor-info-section');
+        if (!btn || !panel) return;
+
+        btn.addEventListener('click', function () {
+            const isOpen = panel.classList.toggle('is-open');
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            panel.setAttribute('aria-hidden',  isOpen ? 'false' : 'true');
+            // Swap button label text while keeping the arrow element intact
+            btn.childNodes[0].textContent = isOpen ? '🔍 Hide Tracking Info ' : '🔍 Show Tracking Info ';
+        });
+    })();
+    </script>
 
 <?php require_once 'footer.php'; ?>

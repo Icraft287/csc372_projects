@@ -1,6 +1,6 @@
 -- ============================================================
 -- Database: isaaccra_clientsite
--- Author:   Isaac Crft
+-- Author:   Isaac Craft
 -- Date:     March 25, 2026
 -- Description: Creates and populates the trips and inquiries
 --              tables for T's Travel client site.

@@ -1,7 +1,7 @@
 <?php
 /*
     File: logout.php
-    Author: Isaac Crft
+    Author: Isaac Craft
     Date: March 25, 2026
     Description: Logs out the admin user by clearing the admin session flag
                  and redirecting back to login.php.

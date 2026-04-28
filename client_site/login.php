@@ -1,7 +1,7 @@
 <?php
 /*
     File: login.php
-    Author: Isaac Crft
+    Author: Isaac Craft
     Date: March 25, 2026
     Description: Admin login page for T's Travel.
                  Checks submitted credentials server-side using password_verify().
@@ -55,6 +55,14 @@ $active_page = 'login';
 require_once 'header.php';
 ?>
 
+    <style>
+        /* Suppress Edge's built-in password reveal button so it doesn't double up */
+        input::-ms-reveal,
+        input::-ms-clear {
+            display: none;
+        }
+    </style>
+
     <header class="hero">
         <div class="hero-content">
             <h1>🔒 Admin Login</h1>
@@ -87,8 +95,17 @@ require_once 'header.php';
 
                         <div class="form-group">
                             <label for="password">Password:</label>
-                            <input type="password" id="password" name="password"
-                                autocomplete="current-password" placeholder="Admin password">
+                            <div style="position: relative;">
+                                <input type="password" id="password" name="password"
+                                    autocomplete="current-password" placeholder="Admin password"
+                                    style="width: 100%; padding-right: 42px; box-sizing: border-box;">
+                                <button type="button" id="toggle-password"
+                                    aria-label="Show password"
+                                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+                                           background: none; border: none; cursor: pointer; padding: 0; font-size: 18px;">
+                                    👁️
+                                </button>
+                            </div>
                         </div>
 
                         <button type="submit" class="cta-button" style="width: 100%; margin-top: 10px;">
@@ -102,5 +119,16 @@ require_once 'header.php';
         </section>
     </main>
 
+    <script>
+        const toggleBtn = document.getElementById('toggle-password');
+        const passwordInput = document.getElementById('password');
+
+        toggleBtn.addEventListener('click', () => {
+            const isHidden = passwordInput.type === 'password';
+            passwordInput.type = isHidden ? 'text' : 'password';
+            toggleBtn.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+            toggleBtn.textContent = isHidden ? '🙈' : '👁️';
+        });
+    </script>
 
 <?php $footer_minimal = true; require_once 'footer.php'; ?>

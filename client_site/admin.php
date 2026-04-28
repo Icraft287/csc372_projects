@@ -1,7 +1,7 @@
 <?php
 /*
     File: admin.php
-    Author: Isaac Crft
+    Author: Isaac Craft
     Date: March 25, 2026
     Description: Admin panel for T's Travel. Handles INSERT, UPDATE, DELETE
                  on trips table. Protected by session auth.

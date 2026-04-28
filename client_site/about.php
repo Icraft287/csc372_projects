@@ -1,7 +1,7 @@
 <?php
 /*
     File: about.php
-    Author: Isaac Crft
+    Author: Isaac Craft
     Date: February 14, 2026
     Description: About Us page for T's Travel - story, values, mission, and why choose us.
     AI help: Got help organizing content flow, styling the values cards consistently, 

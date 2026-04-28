@@ -1,7 +1,7 @@
 <?php
 /*
     File: destination.class.php
-    Author: Isaac Crft
+    Author: Isaac Craft
     Date: March 25, 2026
     Description: Defines the Destination class used by destinations.php
                  to represent a geographic destination region (e.g. Caribbean,

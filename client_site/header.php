@@ -1,7 +1,7 @@
 <?php
 /*
     File: header.php
-    Author: Isaac Crft
+    Author: Isaac Craft
     Date: March 25, 2026
     Description: Shared header include for T's Travel.
                  Set these variables before require_once'ing this file:

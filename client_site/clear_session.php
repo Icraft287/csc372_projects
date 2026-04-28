@@ -1,7 +1,7 @@
 <?php
 /*
     File: clear_session.php
-    Author: Isaac Crft
+    Author: Isaac Craft
     Date: March 25, 2026
     Description: Terminates the current visitor session for T's Travel.
                  Clears all $_SESSION data, destroys the session, and

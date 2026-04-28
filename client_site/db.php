@@ -1,7 +1,7 @@
 <?php
 /*
     File: db.php 
-    Author: Isaac Crft
+    Author: Isaac Craft
     Date: March 25, 2026
     Description: Creates a PDO connection to the isaaccra_clientsite
                  MySQL database hosted on HostGator via cPanel.

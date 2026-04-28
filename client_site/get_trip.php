@@ -1,7 +1,7 @@
 <?php
 /*
     File: get_trip.php
-    Author: Isaac Crft
+    Author: Isaac Craft
     Date: March 25, 2026
     Description: JSON API endpoint used by admin.php (CHANGE #14).
                  When the admin types a trip ID into the update form,

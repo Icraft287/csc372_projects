@@ -1,7 +1,7 @@
 <?php
 /*
     File: services.php
-    Author: Isaac Crft
+    Author: Isaac Craft
     Date: February 14, 2026
     Description: Services page for T's Travel - details on cruises, all-inclusive, 
                  group travel, and custom planning.

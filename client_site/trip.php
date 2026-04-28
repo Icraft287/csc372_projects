@@ -1,7 +1,7 @@
 <?php
 /*
     File: trip.php
-    Author: Isaac Crft
+    Author: Isaac Craft
     Date: March 25, 2026
     Description: Dynamic trip detail page for T's Travel.
                  Uses a query string (?id=X) to retrieve and display

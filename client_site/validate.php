@@ -1,7 +1,7 @@
 <?php
 /*
     File: validate.php
-    Author: Isaac Crft
+    Author: Isaac Craft
     Date: March 25, 2026
     Description: Reusable validation functions for form data collected on destinations.php.
                  Included at the top of destinations.php via require_once.
