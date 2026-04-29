@@ -19,15 +19,22 @@ $is_homepage      = true;
 require_once 'header.php';
 ?>
 
-    <!-- Hero Section with Dynamic Unsplash Background -->
-    <header class="hero" id="hero-section">
-        <div class="hero-content">
-            <h1>Your Dream Vacation Awaits</h1>
-            <p>Personalized travel planning with expert guidance every step of the way</p>
-            <a href="contact.php" class="cta-button">Plan Your Trip</a>
-        </div>
-        <!-- Photo attribution for Unsplash -->
-        <div class="photo-credit" id="photo-credit" style="display: none;"></div>
+    
+    <!-- Hero Section with Local Video Background -->
+    <header class="hero">
+
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="images/video.mp4" type="video/mp4">
+    </video>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1>Your Dream Vacation Awaits</h1>
+        <p>Personalized travel planning with expert guidance every step of the way</p>
+        <a href="contact.php" class="cta-button">Plan Your Trip</a>
+    </div>
+
     </header>
 
     <main>

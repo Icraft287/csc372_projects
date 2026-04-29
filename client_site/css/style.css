@@ -154,6 +154,7 @@ body {
     overflow: hidden;
 }
 
+/* KEEP your decorative gradient but ensure it's above video */
 .hero::before {
     content: '';
     position: absolute;
@@ -163,13 +164,35 @@ body {
     height: 500px;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
     border-radius: 50%;
+    z-index: 1; /* ✅ added */
+}
+
+/* ADD THIS (dark overlay for readability) */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
 }
 
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 3; /* ✅ bumped up so it's above everything */
     max-width: 800px;
     margin: 0 auto;
+}
+
+/*  FIXED video layering */
+.hero-video {
+    position: absolute;
+    top: 0;              /* ✅ changed */
+    left: 0;             /* ✅ changed */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: none;     /* ✅ removed translate */
+    z-index: 0;          /* ✅ critical fix */
 }
 
 .hero h1 {
