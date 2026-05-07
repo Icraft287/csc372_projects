@@ -148,6 +148,7 @@ body {
 .hero {
     background: linear-gradient(135deg, var(--accent-teal) 0%, var(--primary-blue) 100%);
     padding: 80px 40px;
+    height: 100vh;   /* ✅ force hero to viewport height */
     text-align: center;
     color: white;
     position: relative;
